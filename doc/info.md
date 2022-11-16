@@ -10,6 +10,10 @@
 
 这里是本项目的说明文档，主体使用清华Overleaf实现在线协同编辑。
 
+* [C++ Primer Plus](https://cloud.tsinghua.edu.cn/f/7cb9bf1ad95c4e148ffd/?dl=1)
+
+这是「C++圣经」C++ Primer Plus的电子版书籍，可以当作工具书使用，编程中遇到问题可随时查阅。
+
 * [Akebi-CG](https://github.com/Taiga74164/Akebi-GC)
 
 一个原神外挂。这里主要用作小型项目代码参考……
