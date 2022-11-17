@@ -56,7 +56,6 @@ public:
     
     Bot(Position & pos, Direction dir);
     // This function is used to construct an example of bot using the initial value of its position and its direction.
-    ~Bot();
 };
 
 class Map{
@@ -78,17 +77,15 @@ private:
     // This is the number of lights still remains on the map.
     
 public:
-    void Light_lit(Position & pos){}
+    void light_lit(Position & pos);
     // This function is called when the player uses the "LIT" command.
     // This will light the light at that position, and decreases the light_count by 1.
     
     int is_cleared(){return m_light_count;}
     // This function is used to judge whether the lights in the map are all lit up. Its return value is used as the type bool.
-    
+
     Map(Cell * cells, Light * lights, int light_count, std::string name);
     // This function is used to construct the map of the game using the initial values of the related variables.
-    
-    ~Map();
 };
 
 class Game{
@@ -112,23 +109,41 @@ private:
     int m_cmd_lim;
     // This is the remaining limit of the cammands.
     
+    bool m_running;
+    
 public:
-    void cin_cmd(){}
+    void cin_cmd();
     // This function is called to input the command to be processed next.
     
-    void process(){}
+    void op_info();
+    // This function handles the output of the information due to the command sent in.
+    
+    void process();
     // This function is called to process and update the situation of the game.
     // And it will bring about different results due to the variable m_cmd.
     // This is mainly be done in the seperated modules.
     
-    void op_map(){}
+    void set_map();
+    // This function generates and sets the map for the game.
+    
+    void set_bot();
+    // This function sets the bot in the game.
+    
+    void op_map();
     // This method is called to draw and store the condition of the map.
     // It'll mainly be done in the file imgdraw.cpp.
     
-    Game(Map * map, Bot * bot, std::string path, int cmd_lim);
-    // This function is called to generate the whole game process with the initial value of the related variables.
+    void auto_op_map();
+    // This function automatically saves and outputs the condition of the map.
     
-    ~Game();
+    int is_running(){return m_running;}
+    // This describes whether the game is still running.
+    
+    void end_game(){m_running = 0;}
+    // This method ends the game.
+    
+    Game(Map * map = NULL, Bot * bot = NULL, std::string path = cst::SAVE_PATH, int cmd_lim = cst::CMD_LIM);
+    // This function is called to generate the whole game process with the initial value of the related variables.
 };
 
 Game::Game(Map * map, Bot * bot, std::string path, int cmd_lim){
@@ -136,6 +151,7 @@ Game::Game(Map * map, Bot * bot, std::string path, int cmd_lim){
     m_bot = bot;
     m_path = path;
     m_cmd_lim = cmd_lim;
+    m_running = true;
 }
 
 Map::Map(Cell * cells, Light * lights, int light_count, std::string name){

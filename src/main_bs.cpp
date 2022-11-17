@@ -8,5 +8,14 @@
 
 int main_bs(){
     // This is the entrance of the standard version of the game, and will be called in main.cpp.
+    
+    Game game;
+    
+    while(game.is_running()){
+        game.cin_cmd();
+        game.process();
+    }
+    
+    
     return 0;
 }
