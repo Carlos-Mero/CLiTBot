@@ -19,7 +19,6 @@ enum Direction{
     // And a expression like "dir == up" can be used in our program and that would return a bool value of whether it is true or not.
 };
 
-
 struct Light{
     Position pos;
     bool turned_on; // This describes whether the light is turned on or not.
@@ -40,18 +39,14 @@ class Bot{
     // This is the class of the bot we can control.
 private:
     Position m_pos;
+    
     Direction m_dir;
     // These are the private variables of the class Bot, They can't be changed directly without using the methods below.
 public:
-    void move_up(){m_pos.y += 1;}
-    void move_down(){m_pos.y -= 1;}
-    void move_right(){m_pos.x += 1;}
-    void move_left(){m_pos.x -= 1;}
-    void jump_up(){m_pos.h += 1;}
-    void jump_down(){m_pos.h -= 1;}
+    void move();
     // We can call these methods to change the position of the bot.
     
-    void turn(enum Direction d){m_dir = d;}
+    void turn(enum Direction d);
     // we can call this method to change the direction of the bot.
     
     Bot(Position & pos, Direction dir);

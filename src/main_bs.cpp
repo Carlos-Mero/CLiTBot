@@ -12,10 +12,8 @@ int main_bs(){
     Game game;
     
     while(game.is_running()){
-        game.cin_cmd();
         game.process();
     }
-    
     
     return 0;
 }

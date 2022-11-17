@@ -2,6 +2,18 @@
 
 #include "struct.h"
 
+void Bot::move(){
+    // This function moves the bot.
+    
+    return;
+}
+
+void Bot::turn(enum Direction d){
+    // This function moves the bot.
+    
+    return;
+}
+
 void Map::light_lit(Position & pos){
     // This function is called when the player uses the "LIT" command.
     // This will light the light at that position, and decreases the light_count by 1.
