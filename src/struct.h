@@ -1,7 +1,7 @@
 // Here is the definition of data structures used in our project.
 
-#ifndef _STRUCTURES_IS_DEFINED_
-#define _STRUCTURES_IS_DEFINED_
+#ifndef _STRUCTURES_ARE_DEFINED_
+#define _STRUCTURES_ARE_DEFINED_
 // These pro-compilation instructions are used to avoid redefinition of the structures below.
 
 #include "const.h"
