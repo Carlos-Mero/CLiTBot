@@ -59,7 +59,7 @@ private:
     std::string m_name;
     // This is the name of the map.
     
-    Cell * m_cells;
+    Cell ** m_cells;
     // These are the cells on the map, which at most counts 100 rows and 100 columns.
     
     int m_row, m_col;
