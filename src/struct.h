@@ -81,6 +81,10 @@ public:
 
     Map(Cell * cells, Light * lights, int light_count, std::string name);
     // This function is used to construct the map of the game using the initial values of the related variables.
+    ~Map(){
+        if(m_cells != NULL){delete[] m_cells;}
+        if(m_lights != NULL){delete[] m_lights;}
+    }
 };
 
 class Game{
