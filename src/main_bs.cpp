@@ -2,9 +2,6 @@
 
 
 #include "struct.h"
-#include "interaction.cpp"
-#include "runtime.cpp"
-#include "imgdraw.cpp"
 
 int main_bs(){
     // This is the entrance of the standard version of the game, and will be called in main.cpp.
