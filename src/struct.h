@@ -93,7 +93,7 @@ private:
     std::string m_cmd;
     // This is the current cmd inputed by the player.
     
-    Map ** m_map;
+    Map * m_map;
     // This is the map we loaded in our game.
     
     Bot * m_bot;
