@@ -79,7 +79,7 @@ public:
     int is_cleared(){return m_light_count;}
     // This function is used to judge whether the lights in the map are all lit up. Its return value is used as the type bool.
 
-    Map(Cell * cells, Light * lights, int light_count, std::string name);
+    Map(Cell ** cells, Light * lights, int light_count, std::string name);
     // This function is used to construct the map of the game using the initial values of the related variables.
     ~Map(){
         if(m_cells != NULL){delete[] m_cells;}
@@ -144,25 +144,5 @@ public:
     Game(Map * map = NULL, Bot * bot = NULL, std::string path = cst::SAVE_PATH, int cmd_lim = cst::CMD_LIM);
     // This function is called to generate the whole game process with the initial value of the related variables.
 };
-
-Game::Game(Map * map, Bot * bot, std::string path, int cmd_lim){
-    m_map = map;
-    m_bot = bot;
-    m_path = path;
-    m_cmd_lim = cmd_lim;
-    m_running = true;
-}
-
-Map::Map(Cell * cells, Light * lights, int light_count, std::string name){
-    m_cells = cells;
-    m_lights = lights;
-    m_light_count = light_count;
-    m_name = name;
-}
-
-Bot::Bot(Position & pos, Direction dir){
-    m_pos = pos;
-    m_dir = dir;
-}
 
 #endif

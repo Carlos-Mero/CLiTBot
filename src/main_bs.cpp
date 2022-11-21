@@ -1,6 +1,5 @@
 // this is the basic version of the project which only fulfills the least tasks of the whole project.
 
-
 #include "struct.h"
 
 int main_bs(){
