@@ -1,5 +1,0 @@
-/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeFiles/CLiTBot.dir
-/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeFiles/install.dir
-/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeFiles/ALL_BUILD.dir
-/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeFiles/ZERO_CHECK.dir
-/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/include/CMakeFiles/install.dir
