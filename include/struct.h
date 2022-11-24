@@ -7,6 +7,8 @@
 #include "const.h"
 #include <string>
 
+// MARK: Common Structures
+
 struct Position{
     int x, y; // This is the position of the object, x refers to the columns and y the rows.
     int h; // This refers to the height of the object.
@@ -35,6 +37,13 @@ enum Op{
     // We can add something here if we want to add some new commands in our game.
 };
 
+struct pix{
+    // This struct is used to store the data of the pixel in the picture.
+    int r, g, b;
+};
+
+// MARK: Classes
+
 class Bot{
     // This is the class of the bot we can control.
 private:
@@ -48,6 +57,8 @@ public:
     
     void turn(enum Direction d);
     // we can call this method to change the direction of the bot.
+    
+    Position current_position(){return m_pos;}
     
     Bot(Position & pos, Direction dir);
     // This function is used to construct an example of bot using the initial value of its position and its direction.

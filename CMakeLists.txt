@@ -5,7 +5,7 @@ project(CLiTBot VERSION 1.0)
 
 # source directories
 aux_source_directory(./src DIR_SRCS)
-add_subdirectory(./include)
+include_directories(./raylib-cpp)
 include_directories(./include)
 
 # find packages used in our project
