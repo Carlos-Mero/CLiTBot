@@ -1,6 +1,7 @@
 // this is the module that draws and outputs the map of the game.
 
 #include "struct.h"
+#include <fstream>
 
 void Game::op_map(){
     // This function draws and saves the map of the game.

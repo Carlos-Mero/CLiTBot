@@ -14,7 +14,13 @@ const int MAX_LIGHTS = 15;
 
 const int CMD_LIM = 50;
 
-const std::string SAVE_PATH = " ";
+const std::string SAVE_PATH = "./map/";
+
+const int SCREEN_WIDTH = 900;
+
+const int SCREEN_HEIGHT = 450;
+
+const int TARGET_FPS = 60;
   
 }
 #endif

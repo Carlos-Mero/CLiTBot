@@ -1,0 +1,916 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		7D1B7B174F094F2C8200EA9F /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 31E8757440AA44DCAE76CFC0 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				B54D903B12D00C632D6702D7 /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		84147FE8CAFB4DB0BFB84B6B /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = DEE173485E6C4CC2BE422B62 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				8E8EA6584E8806C559AA1108 /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				2C18A1B1F5D44B1889764E3B /* PBXTargetDependency */,
+				A2985FF327E44CAEB7B92E40 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		9CDCBE0DDB694C189BC4347E /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C28611159DCA4217B1CBF823 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				3C4CA964FE834AAE8942EF19 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		23A12B332A9C490AAC85F800 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_bs.cpp */ = {isa = PBXBuildFile; fileRef = 3F06B3058BB04D348BF5032F /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_bs.cpp */; };
+		3D18DB7F5202463099F8ABF8 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/runtime.cpp */ = {isa = PBXBuildFile; fileRef = 7BE73853B270447E9189370F /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/runtime.cpp */; };
+		3EE586F9840C446D8BEF830D /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main.cpp */ = {isa = PBXBuildFile; fileRef = 86B0D6C235454D06AA41F70B /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main.cpp */; };
+		6EFB465F1CD24CBB8EBEDE66 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_ex.cpp */ = {isa = PBXBuildFile; fileRef = 0D7E6B6ADA4649E1BBEB6501 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_ex.cpp */; };
+		81CAED5F72164D26A536D2A5 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/imgdraw.cpp */ = {isa = PBXBuildFile; fileRef = F3AAD59C126A477D8D517952 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/imgdraw.cpp */; };
+		8D07A6F92A344416A7650F90 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/interaction.cpp */ = {isa = PBXBuildFile; fileRef = 7E5077FDC5BF414CA203A9EF /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/interaction.cpp */; };
+		CF4C94AEE0C64ED08F2A3D2D /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/constructors.cpp */ = {isa = PBXBuildFile; fileRef = 28A428EF94D646F9A7FC7C4F /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/constructors.cpp */; };
+		D2A6170B96E1467BA26820E7 /* /Users/huangyanxing/Desktop/程设/CLiTBot/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = B5E7885DFF0448A59807563C /* /Users/huangyanxing/Desktop/程设/CLiTBot/CMakeLists.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		5224B7AF1A2742378B9D564B /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+		5840D4A8952142ED83E82F55 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+		8A1F328DF8D04F0789E60996 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		E60487FCA2BB45EC9A829812 /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		09659A8DFF9E441594495908 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E54E498C90545DD9A8D7566 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55415B0747894675B9F1536D;
+			remoteInfo = CLiTBot;
+		};
+		9E51F2AB6B3441319E90537F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E54E498C90545DD9A8D7566 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D1B7B174F094F2C8200EA9F;
+			remoteInfo = ZERO_CHECK;
+		};
+		AC8C09B3105744A2B704277F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E54E498C90545DD9A8D7566 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D1B7B174F094F2C8200EA9F;
+			remoteInfo = ZERO_CHECK;
+		};
+		FCEB83B3B4B8479B9C2F6A3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E54E498C90545DD9A8D7566 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84147FE8CAFB4DB0BFB84B6B;
+			remoteInfo = ALL_BUILD;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0D7E6B6ADA4649E1BBEB6501 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_ex.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main_ex.cpp; path = src/main_ex.cpp; sourceTree = SOURCE_ROOT; };
+		28A428EF94D646F9A7FC7C4F /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/constructors.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = constructors.cpp; path = src/constructors.cpp; sourceTree = SOURCE_ROOT; };
+		3F06B3058BB04D348BF5032F /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_bs.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main_bs.cpp; path = src/main_bs.cpp; sourceTree = SOURCE_ROOT; };
+		7BE73853B270447E9189370F /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/runtime.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = runtime.cpp; path = src/runtime.cpp; sourceTree = SOURCE_ROOT; };
+		7E5077FDC5BF414CA203A9EF /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/interaction.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = interaction.cpp; path = src/interaction.cpp; sourceTree = SOURCE_ROOT; };
+		86B0D6C235454D06AA41F70B /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
+		B5E7885DFF0448A59807563C /* /Users/huangyanxing/Desktop/程设/CLiTBot/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		D0748353CC0A4068ADCC6758 /* CLiTBot */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = CLiTBot; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3AAD59C126A477D8D517952 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/imgdraw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgdraw.cpp; path = src/imgdraw.cpp; sourceTree = SOURCE_ROOT; };
+		FFDB6648D39C4C238B8F9E64 /* /Users/huangyanxing/Desktop/程设/CLiTBot/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D895A52C891149AA83A65E16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00268F3A1CAC46DE8A6B4128 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				A6A22294B1964A768B813EA0 /* CMake Rules */,
+				FFDB6648D39C4C238B8F9E64 /* /Users/huangyanxing/Desktop/程设/CLiTBot/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		06D1D648C8A04561897CA2AB = {
+			isa = PBXGroup;
+			children = (
+				FBDA9310E23446B48F76DF62 /* CLiTBot */,
+				00268F3A1CAC46DE8A6B4128 /* ALL_BUILD */,
+				F8576BCC73634BB7AA846F45 /* Products */,
+				4E4EF43741714FCF8DAEFCF5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4E4EF43741714FCF8DAEFCF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CD24EFF6D4F42DC8DD9AD30 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				28A428EF94D646F9A7FC7C4F /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/constructors.cpp */,
+				F3AAD59C126A477D8D517952 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/imgdraw.cpp */,
+				7E5077FDC5BF414CA203A9EF /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/interaction.cpp */,
+				86B0D6C235454D06AA41F70B /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main.cpp */,
+				3F06B3058BB04D348BF5032F /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_bs.cpp */,
+				0D7E6B6ADA4649E1BBEB6501 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_ex.cpp */,
+				7BE73853B270447E9189370F /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/runtime.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		A6A22294B1964A768B813EA0 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		F8576BCC73634BB7AA846F45 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0748353CC0A4068ADCC6758 /* CLiTBot */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FBDA9310E23446B48F76DF62 /* CLiTBot */ = {
+			isa = PBXGroup;
+			children = (
+				6CD24EFF6D4F42DC8DD9AD30 /* Source Files */,
+				B5E7885DFF0448A59807563C /* /Users/huangyanxing/Desktop/程设/CLiTBot/CMakeLists.txt */,
+			);
+			name = CLiTBot;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		55415B0747894675B9F1536D /* CLiTBot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CB9F153E5F1406DB07F9899 /* Build configuration list for PBXNativeTarget "CLiTBot" */;
+			buildPhases = (
+				BB05BCFF9A374564978BE670 /* Sources */,
+				D895A52C891149AA83A65E16 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9AAB49137A05426F9C670522 /* PBXTargetDependency */,
+			);
+			name = CLiTBot;
+			productName = CLiTBot;
+			productReference = D0748353CC0A4068ADCC6758 /* CLiTBot */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0E54E498C90545DD9A8D7566 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1410;
+			};
+			buildConfigurationList = AD3D4F45DFAA4902987EE2CA /* Build configuration list for PBXProject "CLiTBot" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				8A1F328DF8D04F0789E60996 /* Debug */,
+				5840D4A8952142ED83E82F55 /* Release */,
+				E60487FCA2BB45EC9A829812 /* MinSizeRel */,
+				5224B7AF1A2742378B9D564B /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 06D1D648C8A04561897CA2AB;
+			projectDirPath = "/Users/huangyanxing/Desktop/程设/CLiTBot";
+			projectRoot = "";
+			targets = (
+				84147FE8CAFB4DB0BFB84B6B /* ALL_BUILD */,
+				55415B0747894675B9F1536D /* CLiTBot */,
+				7D1B7B174F094F2C8200EA9F /* ZERO_CHECK */,
+				9CDCBE0DDB694C189BC4347E /* install */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3C0110FC8322DE7E50886E21 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		87AF4882E018677E2624B544 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		8E8EA6584E8806C559AA1108 /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+"/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeFiles/ALL_BUILD"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  echo Build\\ all\\ projects
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  /opt/homebrew/Cellar/cmake/3.24.3/bin/cmake -DBUILD_TYPE=$CONFIGURATION$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  /opt/homebrew/Cellar/cmake/3.24.3/bin/cmake -DBUILD_TYPE=$CONFIGURATION$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  /opt/homebrew/Cellar/cmake/3.24.3/bin/cmake -DBUILD_TYPE=$CONFIGURATION$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  /opt/homebrew/Cellar/cmake/3.24.3/bin/cmake -DBUILD_TYPE=$CONFIGURATION$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		9B50530E35CC49C82C2FACCF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		B54D903B12D00C632D6702D7 /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+"/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeFiles/ZERO_CHECK"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  make -f /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  make -f /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  make -f /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj
+  make -f /Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/CMakeScripts/ReRunCMake.make
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BB05BCFF9A374564978BE670 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF4C94AEE0C64ED08F2A3D2D /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/constructors.cpp */,
+				81CAED5F72164D26A536D2A5 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/imgdraw.cpp */,
+				8D07A6F92A344416A7650F90 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/interaction.cpp */,
+				3EE586F9840C446D8BEF830D /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main.cpp */,
+				23A12B332A9C490AAC85F800 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_bs.cpp */,
+				6EFB465F1CD24CBB8EBEDE66 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/main_ex.cpp */,
+				3D18DB7F5202463099F8ABF8 /* /Users/huangyanxing/Desktop/程设/CLiTBot/src/runtime.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2C18A1B1F5D44B1889764E3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D1B7B174F094F2C8200EA9F /* ZERO_CHECK */;
+			targetProxy = 9E51F2AB6B3441319E90537F /* PBXContainerItemProxy */;
+		};
+		3C4CA964FE834AAE8942EF19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84147FE8CAFB4DB0BFB84B6B /* ALL_BUILD */;
+			targetProxy = FCEB83B3B4B8479B9C2F6A3B /* PBXContainerItemProxy */;
+		};
+		9AAB49137A05426F9C670522 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D1B7B174F094F2C8200EA9F /* ZERO_CHECK */;
+			targetProxy = AC8C09B3105744A2B704277F /* PBXContainerItemProxy */;
+		};
+		A2985FF327E44CAEB7B92E40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55415B0747894675B9F1536D /* CLiTBot */;
+			targetProxy = 09659A8DFF9E441594495908 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		035F3D33A0B74C1BA491A901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/huangyanxing/Desktop/程设/CLiTBot/./include","/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj","/Users/huangyanxing/Desktop/程设/CLiTBot/src","$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' ";
+				OTHER_LDFLAGS = ("-L/usr/local/opt/llvm/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/opt/homebrew/Cellar/raylib/4.2.0/lib/libraylib.dylib,"$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CLiTBot;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				SYSTEM_HEADER_SEARCH_PATHS = (/opt/homebrew/Cellar/raylib/4.2.0/include,"$(inherited)");
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		13E1E147A506438EACE30DC0 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		3AF5F03A4EB142FBAA3643E9 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk;
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/build";
+			};
+			name = MinSizeRel;
+		};
+		416CDDD9A3DC4F348FB6E72F /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		4955B8F6582E463FA0D04A47 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		4EC1F51611984384B978E0F2 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		6256014F70DB47819C660F5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/huangyanxing/Desktop/程设/CLiTBot/./include","/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj","/Users/huangyanxing/Desktop/程设/CLiTBot/src","$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++17' ";
+				OTHER_LDFLAGS = ("-L/usr/local/opt/llvm/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/opt/homebrew/Cellar/raylib/4.2.0/lib/libraylib.dylib,"$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CLiTBot;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				SYSTEM_HEADER_SEARCH_PATHS = (/opt/homebrew/Cellar/raylib/4.2.0/include,"$(inherited)");
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		6707D9E781024D28879DCA4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		7352AB578AF3481693BAC377 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk;
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/build";
+			};
+			name = RelWithDebInfo;
+		};
+		8A09A88608D947DCAB59432E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk;
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/build";
+			};
+			name = Release;
+		};
+		91C82E3566AE4D6E8F1753E0 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/huangyanxing/Desktop/程设/CLiTBot/./include","/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj","/Users/huangyanxing/Desktop/程设/CLiTBot/src","$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++17' ";
+				OTHER_LDFLAGS = ("-L/usr/local/opt/llvm/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/opt/homebrew/Cellar/raylib/4.2.0/lib/libraylib.dylib,"$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CLiTBot;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				SYSTEM_HEADER_SEARCH_PATHS = (/opt/homebrew/Cellar/raylib/4.2.0/include,"$(inherited)");
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		95E682260F0140C5B0D50AE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk;
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj/build";
+			};
+			name = Debug;
+		};
+		9DD2F3FFCBD442E091F2938A /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/huangyanxing/Desktop/程设/CLiTBot/./include","/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj","/Users/huangyanxing/Desktop/程设/CLiTBot/src","$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' ";
+				OTHER_LDFLAGS = ("-L/usr/local/opt/llvm/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/opt/homebrew/Cellar/raylib/4.2.0/lib/libraylib.dylib,"$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CLiTBot;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				SYSTEM_HEADER_SEARCH_PATHS = (/opt/homebrew/Cellar/raylib/4.2.0/include,"$(inherited)");
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		C066FC09B7FD478B9F843788 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		C0F71306460B41AE82F7C855 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		C581BC8358E04D6DABA97931 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		C7FF88EBE01348CB9D7EBEB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		CA24613E46A04642AD6FF016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		D3121FE20B244EF88930DB8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		DA6C12990B644240B8389A27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/huangyanxing/Desktop/程设/CLiTBot/xcproj";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		31E8757440AA44DCAE76CFC0 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6707D9E781024D28879DCA4C /* Debug */,
+				D3121FE20B244EF88930DB8E /* Release */,
+				4EC1F51611984384B978E0F2 /* MinSizeRel */,
+				416CDDD9A3DC4F348FB6E72F /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6CB9F153E5F1406DB07F9899 /* Build configuration list for PBXNativeTarget "CLiTBot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6256014F70DB47819C660F5C /* Debug */,
+				035F3D33A0B74C1BA491A901 /* Release */,
+				9DD2F3FFCBD442E091F2938A /* MinSizeRel */,
+				91C82E3566AE4D6E8F1753E0 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AD3D4F45DFAA4902987EE2CA /* Build configuration list for PBXProject "CLiTBot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95E682260F0140C5B0D50AE4 /* Debug */,
+				8A09A88608D947DCAB59432E /* Release */,
+				3AF5F03A4EB142FBAA3643E9 /* MinSizeRel */,
+				7352AB578AF3481693BAC377 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C28611159DCA4217B1CBF823 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C066FC09B7FD478B9F843788 /* Debug */,
+				CA24613E46A04642AD6FF016 /* Release */,
+				C581BC8358E04D6DABA97931 /* MinSizeRel */,
+				4955B8F6582E463FA0D04A47 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DEE173485E6C4CC2BE422B62 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7FF88EBE01348CB9D7EBEB3 /* Debug */,
+				DA6C12990B644240B8389A27 /* Release */,
+				13E1E147A506438EACE30DC0 /* MinSizeRel */,
+				C0F71306460B41AE82F7C855 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0E54E498C90545DD9A8D7566 /* Project object */;
+}

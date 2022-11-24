@@ -6,16 +6,16 @@
 
 ---
 
-编译指导
+### 编译指导
 
 目前我们采用CMake实现跨平台构建方案，其中使用到了外部库raylib实现图形绘制，同时使用pkg-config进行库管理。在开始构建项目前需要首先安装上述依赖，此后可在此文件夹中打开命令行，依次输入：
 
 ```
 mkdir build
 cd build && cmake ..
-cmake --build
+make
 ```
 
 由此即可完成项目构建。
 
-此外，本项目的release页面也有macOS版本的预编译程序。
+此外，本项目的release页面也有macOS版本的预编译程序可供下载游玩（ARM64架构）。
