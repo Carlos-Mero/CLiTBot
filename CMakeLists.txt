@@ -18,3 +18,4 @@ add_executable(${PROJECT_NAME} ${DIR_SRCS})
 # link instructions
 target_link_libraries(${PROJECT_NAME} PUBLIC PkgConfig::raylib)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)

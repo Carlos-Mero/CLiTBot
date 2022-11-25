@@ -3,5 +3,6 @@
 
 int main_bs();
 int main_ex();
+int test();
 
 #endif

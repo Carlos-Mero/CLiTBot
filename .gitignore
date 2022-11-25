@@ -36,3 +36,6 @@ build/
 
 #projects
 xcproj/
+
+#debug
+test.cpp

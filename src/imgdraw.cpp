@@ -21,10 +21,23 @@ void Game::op_map(){
     mapfile.write((char *)&cst::BIH, sizeof(cst::BIH));
     // Here we write in the header of the picture.
     
+    for(int y = cst::SCREEN_HEIGHT-1; y >= 0; y++){
+        for(int x = 0; x < cst::SCREEN_WIDTH; x++){
+            pix p = {
+                (int)((x+0.0)/cst::SCREEN_WIDTH * 255 + 0.5),
+                (int)((x+y+0.0)/(cst::SCREEN_WIDTH+cst::SCREEN_HEIGHT) * 255 + 0.5),
+                (int)((y+0.5)/cst::SCREEN_HEIGHT * 255 + 0.5)
+            };
+            mapfile.write((char *)&p, sizeof(p));
+        }
+    }
+    
     Position plt_st = m_bot->current_position();
     plt_st.x -= cst::SCREEN_WIDTH / 2;
     plt_st.y -= cst::SCREEN_HEIGHT / 2;
     // Set the position of the bot as the center of the whole picture.
+    
+    mapfile.close();
     
     std::cout << "当前地图输出成功！" << std::endl;
     
