@@ -9,10 +9,11 @@
 void Game::op_map(){
     // This function draws and saves the map of the game.
     std::ofstream mapfile;
-    mapfile.open(m_path + "basic_save.bmp", std::ios::binary);
+    mapfile.open(cst::SAVE_PATH + "save.bmp", std::ios::binary);
     // Warning! This method will open the file and wipe all the content existing there! But for our purpose of saving the map, it's just fine.
     
     if(!mapfile.is_open()){
+        mapfile.close();
         std::cout << "发生了一些意外……文件没能正常打开？！" << std::endl;
         return;
     }
@@ -21,20 +22,16 @@ void Game::op_map(){
     mapfile.write((char *)&cst::BIH, sizeof(cst::BIH));
     // Here we write in the header of the picture.
     
-    for(int y = cst::SCREEN_HEIGHT-1; y >= 0; y++){
-        for(int x = 0; x < cst::SCREEN_WIDTH; x++){
-            pix p = {
-                (int)((x+0.0)/cst::SCREEN_WIDTH * 255 + 0.5),
-                (int)((x+y+0.0)/(cst::SCREEN_WIDTH+cst::SCREEN_HEIGHT) * 255 + 0.5),
-                (int)((y+0.5)/cst::SCREEN_HEIGHT * 255 + 0.5)
-            };
+    for(int y = cst::SCREEN_HEIGHT-1; y >= 0; y--){
+        for(int x = 0; x < cst::SCREEN_WIDTH-cst::WIDGET_WIDTH; x++){
+            pix p = {0, 0, 0};
             mapfile.write((char *)&p, sizeof(p));
         }
     }
     
-    Position plt_st = m_bot->current_position();
+    /*Position plt_st = m_bot->current_position();
     plt_st.x -= cst::SCREEN_WIDTH / 2;
-    plt_st.y -= cst::SCREEN_HEIGHT / 2;
+    plt_st.y -= cst::SCREEN_HEIGHT / 2;*/
     // Set the position of the bot as the center of the whole picture.
     
     mapfile.close();

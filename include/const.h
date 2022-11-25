@@ -6,24 +6,26 @@
 
 // MARK: Related structures
 
+#pragma pack(1)
 struct BMPFileHeader{
-    char id[2];
-    unsigned int size;
-    int res1;
-    int res2;
-    unsigned int offset;
+    short id;
+    int size;
+    short res1;
+    short res2;
+    int offset;
 };
 
 struct BMPInfoHeader{
     int head_length;
-    unsigned int pic_width;
-    unsigned int pic_height;
-    unsigned int surfaces;
-    unsigned int depth;
-    unsigned int archive_method;
-    unsigned int pic_size;
-    unsigned int res[4]; // These data will not be used in our program.
+    int pic_width;
+    int pic_height;
+    short surfaces;
+    short depth;
+    int archive_method;
+    int pic_size;
+    int res[4]; // These data will not be used in our program.
 };
+#pragma pack()
 
 // MARK: Constants
 
@@ -47,7 +49,7 @@ const int WIDGET_WIDTH = 100;
 
 const int TARGET_FPS = 60;
 
-const BMPFileHeader BFH = {{'B', 'M'}, (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT * 3 + 0x36, 0, 0, 0x36};
+const BMPFileHeader BFH = {0x4D42, (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT * 3 + 0x36, 0, 0, 0x36};
 
 const BMPInfoHeader BIH = {0x28, SCREEN_WIDTH - WIDGET_WIDTH, SCREEN_HEIGHT, 1, 24, 0, (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT, {0}};
   
