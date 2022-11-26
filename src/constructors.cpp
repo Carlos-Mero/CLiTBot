@@ -3,7 +3,7 @@
 #include "struct.h"
 
 
-Game::Game(Map * map, Bot * bot, std::string path, int cmd_lim){
+Game::Game(std::string path, int cmd_lim, Map * map, Bot * bot){
     m_map = map;
     m_bot = bot;
     m_path = path;
@@ -11,7 +11,7 @@ Game::Game(Map * map, Bot * bot, std::string path, int cmd_lim){
     m_running = true;
 }
 
-Map::Map(Cell ** cells, Light * lights, int light_count, std::string name){
+Map::Map(Cell * cells, Light * lights, int light_count, std::string name){
     m_cells = cells;
     m_lights = lights;
     m_light_count = light_count;

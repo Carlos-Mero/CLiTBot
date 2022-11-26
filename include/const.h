@@ -3,29 +3,7 @@
 #define _CONSTS_IN_THE_GAME_
 
 #include <string>
-
-// MARK: Related structures
-
-#pragma pack(1)
-struct BMPFileHeader{
-    short id;
-    int size;
-    short res1;
-    short res2;
-    int offset;
-};
-
-struct BMPInfoHeader{
-    int head_length;
-    int pic_width;
-    int pic_height;
-    short surfaces;
-    short depth;
-    int archive_method;
-    int pic_size;
-    int res[4]; // These data will not be used in our program.
-};
-#pragma pack()
+#include "struct.h"
 
 // MARK: Constants
 
@@ -41,6 +19,8 @@ const int CMD_LIM = 50;
 
 const std::string SAVE_PATH = "./output/";
 
+// MARK: Used in Imgdraw
+
 const int SCREEN_WIDTH = 900;
 
 const int SCREEN_HEIGHT = 450;
@@ -48,6 +28,36 @@ const int SCREEN_HEIGHT = 450;
 const int WIDGET_WIDTH = 100;
 
 const int TARGET_FPS = 60;
+
+const pix grey_blue = {216, 170, 143};
+
+const pix dark_grey = {132, 116, 107};
+
+const pix light_grey = {230, 208, 195};
+
+const pix background_color = {233, 233, 233};
+
+const pix light_off = {123, 124, 221};
+
+const pix light_on = {164, 225, 168};
+
+const int cell_length = 100;
+
+const int cell_width = 70;
+
+const int cell_height = 30;
+
+const int max_cells_l = 20;
+
+const int max_cells_w = 14;
+
+const std::string path_to_bot_up = "./resources/bot_up.bmp";
+
+const std::string path_to_bot_down = "./resources/bot_down.bmp";
+
+const std::string path_to_bot_right = "./resources/bot_right.bmp";
+
+const std::string path_to_bot_left = "./resources/bot_left.bmp";
 
 const BMPFileHeader BFH = {0x4D42, (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT * 3 + 0x36, 0, 0, 0x36};
 

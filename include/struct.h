@@ -4,7 +4,6 @@
 #define _STRUCTURES_ARE_DEFINED_
 // These pro-compilation instructions are used to avoid redefinition of the structures below.
 
-#include "const.h"
 #include <string>
 
 // MARK: Common Structures
@@ -37,12 +36,7 @@ enum Op{
     // We can add something here if we want to add some new commands in our game.
 };
 
-struct pix{
-    // This struct is used to store the data of the pixel in the picture.
-    int r, g, b;
-};
-
-// MARK: Classes
+// MARK: Main Classes
 
 class Bot{
     // This is the class of the bot we can control.
@@ -60,6 +54,8 @@ public:
     
     Position current_position(){return m_pos;}
     
+    Direction current_direction(){return m_dir;}
+    
     Bot(Position & pos, Direction dir);
     // This function is used to construct an example of bot using the initial value of its position and its direction.
 };
@@ -70,8 +66,11 @@ private:
     std::string m_name;
     // This is the name of the map.
     
-    Cell ** m_cells;
+    Cell * m_cells;
     // These are the cells on the map, which at most counts 100 rows and 100 columns.
+    
+    int m_cell_count;
+    // This variable describes the number of the cells in our game.
     
     int m_row, m_col;
     // These are the rows and columns actually used in the exact map.
@@ -87,10 +86,14 @@ public:
     // This function is called when the player uses the "LIT" command.
     // This will light the light at that position, and decreases the light_count by 1.
     
-    int is_cleared(){return m_light_count;}
+    int is_not_cleared(){return m_light_count;}
     // This function is used to judge whether the lights in the map are all lit up. Its return value is used as the type bool.
+    
+    Cell * cells(){return m_cells;}
+    
+    int cells_count(){return m_cell_count;}
 
-    Map(Cell ** cells, Light * lights, int light_count, std::string name);
+    Map(Cell * cells, Light * lights, int light_count, std::string name);
     // This function is used to construct the map of the game using the initial values of the related variables.
     ~Map(){
         if(m_cells != NULL){delete[] m_cells;}
@@ -115,6 +118,7 @@ private:
     
     int m_auto_save_id;
     // This describes whether the auto_save ability is turned on, and at the same time restores the index of the save file.
+    // It's also used to describe the name of the save file.
     
     int m_cmd_lim;
     // This is the remaining limit of the cammands.
@@ -139,7 +143,7 @@ public:
     void set_bot();
     // This function sets the bot in the game.
     
-    void op_map();
+    void op_map(std::string file_name = "save.bmp");
     // This method is called to draw and store the condition of the map.
     // It'll mainly be done in the file imgdraw.cpp.
     
@@ -152,8 +156,40 @@ public:
     void end_game(){m_running = 0;}
     // This method ends the game.
     
-    Game(Map * map = NULL, Bot * bot = NULL, std::string path = cst::SAVE_PATH, int cmd_lim = cst::CMD_LIM);
+    Game(std::string path, int cmd_lim, Map * map = NULL, Bot * bot = NULL);
     // This function is called to generate the whole game process with the initial value of the related variables.
+};
+
+
+// MARK: Module Related Structures
+
+#pragma pack(1)
+// These struct sets the header of the output file.
+struct BMPFileHeader{
+    short id;
+    int size;
+    short res1;
+    short res2;
+    int offset;
+};
+
+struct BMPInfoHeader{
+    int head_length;
+    int pic_width;
+    int pic_height;
+    short surfaces;
+    short depth;
+    int archive_method;
+    int pic_size;
+    int res[4]; // These data will not be used in our program.
+};
+#pragma pack()
+
+struct pix{
+    // This struct is used to store the data of the pixel in the picture.
+    unsigned char blue;
+    unsigned char green;
+    unsigned char red;
 };
 
 #endif

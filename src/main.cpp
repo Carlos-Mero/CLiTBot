@@ -1,4 +1,4 @@
-// This is the main entrance of CLiTBot, a project of the course "The Basis of Program Design".
+// This is the main entrance of CLiTBot, a project of the course "Programming Basis".
 // There're Three members here in our group, They are Yu Zhan, Huang Yanxing and Wang Yuhan. Thanks for all!
 
 #include "modes.h"
