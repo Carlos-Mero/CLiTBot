@@ -41,11 +41,19 @@ const pix light_off = {123, 124, 221};
 
 const pix light_on = {164, 225, 168};
 
+const pix dark_line = {23, 23, 23};
+
+const pix white_pix = {255, 255, 255};
+
 const int cell_length = 100;
 
 const int cell_width = 70;
 
 const int cell_height = 30;
+
+const int bot_width_pixels = 75;
+
+const int bot_height_pixels = 150;
 
 const int max_cells_l = 20;
 

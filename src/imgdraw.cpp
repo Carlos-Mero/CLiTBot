@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 void Game::op_map(std::string file_name){
     // This function draws and saves the map of the game.
@@ -65,21 +66,65 @@ void Game::op_map(std::string file_name){
 		// Transfers the position of the cell to a 2.5D view.
 		
 		if (paint_pos.x >= -cst::max_cells_l/2 && paint_pos.x <= cst::max_cells_l/2 && paint_pos.y >= -cst::max_cells_w/2 && paint_pos.y <= cst::max_cells_w/2) {
+			int paint_center_l = paint_pos.x * cst::cell_length/2 + (cst::SCREEN_WIDTH-cst::WIDGET_WIDTH)/2;
 			
-			for(int x = (paint_pos.x-1) * cst::cell_length/2 + (cst::SCREEN_WIDTH-cst::WIDGET_WIDTH)/2; x <= (paint_pos.x+1) * cst::cell_length/2 + (cst::SCREEN_WIDTH-cst::WIDGET_WIDTH)/2; x++){
+			for(int x = paint_center_l - cst::cell_length/2; x <= paint_center_l + cst::cell_length/2; x++){
 				
 				if (x < 0 || x > cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) {
 					continue;
 				}else{
-					for(int y = (paint_pos.y-1) * cst::cell_width/2 + cst::SCREEN_HEIGHT/2; y <= (paint_pos.y+1) * cst::cell_width + cst::SCREEN_HEIGHT/2; y++){
+					int paint_center_w = paint_pos.y * cst::cell_width/2 + cst::SCREEN_HEIGHT/2 + paint_pos.h * cst::cell_height;
+					int paint_width_expansion = (70 - std::abs(x - paint_center_l) * 7 / 10) / 2;
+					
+					for(int y = paint_center_w + paint_width_expansion + 1; y <= paint_center_w - paint_width_expansion - 1; y--){
 						
-						
+						if (y < 0 || y > cst::SCREEN_HEIGHT) {
+							continue;
+						}else{
+							pic[x][y] = cst::grey_blue;
+						}
 						
 					}
+					
+					for(int k = 0; k < paint_pos.h; k++){
+						
+						for(int y = paint_center_w - paint_width_expansion - k * cst::cell_height - 1; y >= paint_center_w - paint_width_expansion - (k+1) * cst::cell_height; y--){
+							
+							if (y < 0 || y > cst::SCREEN_HEIGHT) {
+								continue;
+							}else{
+								if (x < paint_center_l && paint_width_expansion != 0) {
+									pic[x][y] = cst::grey_blue;
+								}else if (x > paint_center_l && paint_width_expansion != 0) {
+									pic[x][y] = cst::dark_grey;
+								}else{
+									pic[x][y] = cst::dark_line;
+								}
+							}
+							
+						}
+						
+					}
+					pic[x][paint_center_w + paint_width_expansion] = cst::dark_line;
+					pic[x][paint_center_w - paint_width_expansion] = cst::dark_line;
+					
 				}
 			}
 		}else{
 			continue;
+		}
+	}
+	// This will draw the map to the main memory.
+	// Then we will draw the bot on the center of the map.
+	pix current_pixel;
+	for (int x = (cst::SCREEN_WIDTH-cst::WIDGET_WIDTH-cst::bot_width_pixels)/2; x <= (cst::SCREEN_WIDTH-cst::WIDGET_WIDTH+cst::bot_width_pixels)/2 && !bot_img.eof(); x++) {
+		for (int y = (cst::SCREEN_HEIGHT+cst::bot_height_pixels)/2; y >= (cst::SCREEN_HEIGHT-cst::bot_height_pixels)/2 && !bot_img.eof(); y--) {
+			bot_img.read((char *)&current_pixel, sizeof(pix));
+			if (current_pixel.green == cst::white_pix.green && current_pixel.blue == cst::white_pix.blue && current_pixel.red == cst::white_pix.red) {
+				continue;
+			}else{
+				pic[x][y] = current_pixel;
+			}
 		}
 	}
 	
@@ -103,6 +148,9 @@ void Game::op_map(std::string file_name){
 
 void Game::auto_op_map(){
     // This function automatically saves and outputs the condition of the map.
-    
+	if (m_auto_save_id) {
+		op_map(std::to_string(m_auto_save_id));
+	}
+	
     return;
 }
