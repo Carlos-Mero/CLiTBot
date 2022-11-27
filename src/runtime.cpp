@@ -1,6 +1,7 @@
 // This is the module that reads from the input and runs the whole game.
 
 #include "struct.h"
+#include <iostream>
 
 void Bot::move(){
     // This function moves the bot.
@@ -10,6 +11,46 @@ void Bot::move(){
 
 void Bot::turn(enum Direction d){
     // This function moves the bot.
+    
+    if (d == left) {
+        switch (m_dir) {
+            case up:
+                m_dir = left;
+                break;
+            case left:
+                m_dir = down;
+                break;
+            case down:
+                m_dir = right;
+                break;
+            case right:
+                m_dir = up;
+                break;
+                
+            default:
+                break;
+        }
+    }else if (d == right){
+        switch (m_dir) {
+            case up:
+                m_dir = right;
+                break;
+            case left:
+                m_dir = up;
+                break;
+            case down:
+                m_dir = left;
+                break;
+            case right:
+                m_dir = down;
+                break;
+                
+            default:
+                break;
+        }
+    }else{
+        std::cout << "发生了一些错误，无法处理转向方向" << std::endl;
+    }
     
     return;
 }
