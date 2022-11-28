@@ -39,3 +39,4 @@ xcproj/
 
 #debug
 test.cpp
+main_test.cpp
