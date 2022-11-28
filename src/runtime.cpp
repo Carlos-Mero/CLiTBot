@@ -9,8 +9,8 @@ void Bot::move(){
     return;
 }
 
-void Bot::turn(enum Direction d){
-    // This function moves the bot.
+void Bot::turn(Direction d){
+    // This function changes the direction of the bot.
     
     if (d == left) {
         switch (m_dir) {
