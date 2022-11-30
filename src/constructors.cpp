@@ -11,6 +11,10 @@ Game::Game(std::string path, int cmd_lim, Map * map, Bot * bot){
     m_running = true;
 }
 
+Ex_game::Ex_game(std::string path, int cmd_lim, Map * map, Bot * bot) : Game(path, cmd_lim, map, bot){
+    
+}
+
 Map::Map(Cell * cells, Light * lights, int light_count, std::string name){
     m_cells = cells;
     m_lights = lights;

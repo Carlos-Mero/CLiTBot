@@ -6,11 +6,13 @@
 int main_bs(){
     // This is the entrance of the standard version of the game, and will be called in main.cpp.
     
-    Game game(cst::SAVE_PATH, cst::CMD_LIM);
+    Game * game = new Game(cst::SAVE_PATH, cst::CMD_LIM);
     
-    while(game.is_running()){
-        game.process();
+    while(game->is_running()){
+        game->process();
     }
+    
+    delete game;
     
     return 0;
 }

@@ -1,7 +1,10 @@
 // This is the module that interacts with the user.
 
 #include "struct.h"
+#include "const.h"
 #include <iostream>
+
+// MARK: Standard features
 
 void Game::cin_cmd(){
     // This function handles the interaction with the player.
@@ -12,6 +15,20 @@ void Game::cin_cmd(){
 
 void Game::op_info(){
     // This function handles the output of the information due to the command sent in.
+    
+    return;
+}
+
+// MARK: Extended features
+
+void Ex_game::show_help_window(){
+    
+    return;
+}
+
+void Ex_game::show_start_window(){
+    
+    DrawText(cst::start_message, 340, 190, 26, cst::textcolor);
     
     return;
 }

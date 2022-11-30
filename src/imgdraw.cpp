@@ -7,6 +7,8 @@
 #include <string>
 #include <cstdlib>
 
+// MARK: Standard features
+
 void Game::op_map(std::string file_name){
     // This function draws and saves the map of the game.
     std::ofstream mapfile;
@@ -151,6 +153,70 @@ void Game::auto_op_map(){
 	if (m_auto_save_id) {
 		op_map(std::to_string(m_auto_save_id));
 	}
+
+	m_auto_save_id++;
 	
+    return;
+}
+
+// MARK: Extended features
+
+void Ex_game::set_main_window(int width, int height, std::string title){
+    
+    if (main_window != NULL) {
+        delete main_window;
+    }
+    
+    main_window = new raylib::Window(width, height, title);
+}
+
+void Ex_game::grid_init(){
+    
+    ver_line_0 = new raylib::Rectangle(cst::ver_line_0_pos, cst::ver_line_0_size);
+    
+    ver_line_1 = new raylib::Rectangle(cst::ver_line_1_pos, cst::ver_line_1_size);
+    
+    hor_line_0 = new raylib::Rectangle(cst::hor_line_0_pos, cst::hor_line_0_size);
+    
+    hor_line_1 = new raylib::Rectangle(cst::hor_line_1_pos, cst::hor_line_1_size);
+    
+    game_space = new raylib::Rectangle(cst::game_view_pos, cst::game_view_size);
+    
+    help_background = new raylib::Rectangle(cst::help_background_pos, cst::help_background_size);
+    
+    help_text_color = RAYWHITE;
+    
+    help_background_color = cst::rayblue;
+    
+    help_index = 0;
+    
+    start_index = 1;
+    
+    return;
+}
+
+void Ex_game::draw_grid(){
+    
+    ver_line_0->Draw(cst::rayblue);
+    
+    ver_line_1->Draw(cst::rayblue);
+    
+    hor_line_0->Draw(cst::rayblue);
+    
+    hor_line_1->Draw(cst::rayblue);
+    
+    game_space->Draw(cst::midgrey);
+    
+    help_background->Draw(help_background_color);
+    
+    return;
+}
+
+void Ex_game::draw_text(){
+    
+    DrawText("GLiTBot!", 10, 7, 20, cst::rayblue);
+    
+    DrawText("?", 108, 6, 20, help_text_color);
+    
     return;
 }

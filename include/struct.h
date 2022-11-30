@@ -5,6 +5,7 @@
 // These pro-compilation instructions are used to avoid redefinition of the structures below.
 
 #include <string>
+#include "raylib-cpp.hpp"
 
 // MARK: Common Structures
 
@@ -103,7 +104,7 @@ public:
 
 class Game{
     // This is the class of the whole game process.
-private:
+protected:
     std::string m_cmd;
     // This is the current cmd inputed by the player.
     
@@ -190,6 +191,73 @@ struct pix{
     unsigned char blue;
     unsigned char green;
     unsigned char red;
+};
+
+// MARK: Extended structures
+
+class Ex_game : public Game{
+    
+protected:
+    
+    raylib::Window * main_window;
+    
+    raylib::Vector2 mouse_pos;
+    
+    raylib::Rectangle * ver_line_0;
+    
+    raylib::Rectangle * ver_line_1;
+    
+    raylib::Rectangle * hor_line_0;
+    
+    raylib::Rectangle * hor_line_1;
+    
+    raylib::Rectangle * game_space;
+    
+    raylib::Rectangle * help_background;
+    
+    raylib::Rectangle * dynamic_curser;
+    bool text_selected;
+    // This plays the role of a text curser.
+    
+    raylib::Color help_text_color;
+    
+    raylib::Color help_background_color;
+    
+    int help_index, start_index;
+    
+public:
+    
+    void ex_process();
+    
+    void grid_init();
+    
+    void draw_grid();
+    
+    void draw_text();
+    
+    int should_show_help(){return help_index % 2;}
+    
+    void show_help_window();
+    
+    int should_show_start_window(){return start_index % 2;}
+    
+    void show_start_window();
+    
+    void set_main_window(int width, int height, std::string title);
+    
+    raylib::Window * get_main_window(){return main_window;}
+    
+    Ex_game(std::string path, int cmd_lim, Map * map = NULL, Bot * bot = NULL);
+    
+    ~Ex_game(){
+        delete main_window;
+        delete ver_line_0;
+        delete ver_line_1;
+        delete hor_line_0;
+        delete hor_line_1;
+        delete help_background;
+        delete dynamic_curser;
+    };
 };
 
 #endif

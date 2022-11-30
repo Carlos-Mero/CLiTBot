@@ -1,7 +1,10 @@
 // This is the module that reads from the input and runs the whole game.
 
 #include "struct.h"
+#include "const.h"
 #include <iostream>
+
+// MARK: Standard features
 
 void Bot::move(){
     // This function moves the bot.
@@ -81,6 +84,32 @@ void Game::process(){
     // It will need the cooperation of all three modules of the game.
     // In this function we may need to call many other methods of the class Game.
     // All variables in this game will be updated here in this method.
+    
+    return;
+}
+
+// MARK: Extended features
+
+void Ex_game::ex_process(){
+    
+    if (main_window->ShouldClose()) {
+        m_running = false;
+    }
+    
+    mouse_pos = raylib::Mouse::GetPosition();
+    
+    if (help_background->CheckCollision(mouse_pos)) {
+        help_background_color = cst::raylightblue;
+        if (raylib::Mouse::IsButtonPressed(MOUSE_BUTTON_LEFT)) {
+            help_index++;
+        }
+    }else {
+        help_background_color = cst::rayblue;
+    }
+    
+    if (IsKeyPressed(KEY_SPACE)) {
+        start_index++;
+    }
     
     return;
 }
