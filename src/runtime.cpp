@@ -3,6 +3,7 @@
 #include "struct.h"
 #include "const.h"
 #include <iostream>
+#include <stdio.h>
 
 // MARK: Standard features
 
@@ -90,6 +91,90 @@ void Game::process(){
 
 // MARK: Extended features
 
+// MARK: Initializer for the interface
+
+void Ex_game::grid_init(){
+    
+    ver_line_0 = new raylib::Rectangle(cst::ver_line_0_pos, cst::ver_line_0_size);
+    
+    ver_line_1 = new raylib::Rectangle(cst::ver_line_1_pos, cst::ver_line_1_size);
+    
+    hor_line_0 = new raylib::Rectangle(cst::hor_line_0_pos, cst::hor_line_0_size);
+    
+    hor_line_1 = new raylib::Rectangle(cst::hor_line_1_pos, cst::hor_line_1_size);
+    
+    game_space = new raylib::Rectangle(cst::game_view_pos, cst::game_view_size);
+    
+    text_space = new raylib::Rectangle(cst::text_space_pos, cst::text_space_size);
+    
+    dynamic_curser = new raylib::Rectangle(cst::dynamic_cursor_start_pos, cst::dynamic_cursor_size);
+    
+    help_background = new raylib::Rectangle(cst::help_background_pos, cst::help_background_size);
+    
+    help_text_color = RAYWHITE;
+    
+    help_background_color = cst::rayblue;
+    
+    help_index = 0;
+    
+    start_index = true;
+    
+    frame_count = 0;
+    
+    text_selected = 1;
+    
+    input_chars[10] = '\0';
+    
+    input_count = 0;
+    
+    command_list_index = 0;
+    
+    return;
+}
+
+// MARK: Input handler
+
+void Ex_game::input_process(){
+    
+    int key = GetCharPressed();
+    
+    while (key > 0) {
+        
+        if ((key >= 32) && (key <= 125) && (input_count < cst::message_max_len)) {
+            
+            input_chars[input_count] = (char)key;
+            input_count++;
+            input_chars[input_count] = '\0';
+            
+        }
+        key = GetCharPressed();
+    }
+    
+    if (IsKeyPressed(KEY_BACKSPACE) && input_count > 0) {
+        
+        input_count--;
+        input_chars[input_count] = '\0';
+        
+    } else if (IsKeyPressed(KEY_BACKSPACE) && input_count == 0) {
+        
+        input_chars[input_count] = '\0';
+        
+    } else if (IsKeyPressed(KEY_ENTER) && input_count > 0){
+        
+        strcpy(command_lists[command_list_index%cst::CMD_list_max_len], input_chars);
+        command_list_index++;
+        input_count = 0;
+        input_chars[input_count] = '\0';
+        
+    }
+    
+    dynamic_curser->SetPosition(cst::dynamic_cursor_start_pos.GetX() + MeasureText(input_chars, 18), dynamic_curser->GetY());
+    
+    return;
+}
+
+// MARK: Ex_process workflow
+
 void Ex_game::ex_process(){
     
     if (main_window->ShouldClose()) {
@@ -108,8 +193,26 @@ void Ex_game::ex_process(){
     }
     
     if (IsKeyPressed(KEY_SPACE)) {
-        start_index++;
+        start_index = false;
     }
+    
+    if (text_space->CheckCollision(mouse_pos) && raylib::Mouse::IsButtonPressed(MOUSE_BUTTON_LEFT)) {
+        text_selected = 1;
+    }
+    
+    if (!text_space->CheckCollision(mouse_pos) && raylib::Mouse::IsButtonPressed(MOUSE_BUTTON_LEFT)) {
+        text_selected = 0;
+    }
+    
+    if (frame_count/32 % 2 && text_selected) {
+        dynamic_curser->Draw(cst::rayblue);
+    }
+    
+    if (text_selected) {
+        input_process();
+    }
+    
+    frame_count++;
     
     return;
 }

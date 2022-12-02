@@ -213,6 +213,8 @@ protected:
     
     raylib::Rectangle * game_space;
     
+    raylib::Rectangle * text_space;
+    
     raylib::Rectangle * help_background;
     
     raylib::Rectangle * dynamic_curser;
@@ -223,11 +225,23 @@ protected:
     
     raylib::Color help_background_color;
     
-    int help_index, start_index;
+    int help_index;
+    
+    bool start_index;
+    
+    int frame_count;
+    
+    char input_chars[11];
+    int input_count;
+    
+    char command_lists[13][11];
+    int command_list_index;
     
 public:
     
     void ex_process();
+    
+    void input_process();
     
     void grid_init();
     
@@ -239,7 +253,7 @@ public:
     
     void show_help_window();
     
-    int should_show_start_window(){return start_index % 2;}
+    int should_show_start_window(){return start_index;}
     
     void show_start_window();
     
@@ -257,6 +271,7 @@ public:
         delete hor_line_1;
         delete help_background;
         delete dynamic_curser;
+        delete text_space;
     };
 };
 

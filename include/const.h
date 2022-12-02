@@ -76,29 +76,37 @@ const BMPInfoHeader BIH = {0x28, SCREEN_WIDTH - WIDGET_WIDTH, SCREEN_HEIGHT, 1, 
 
 // MARK: Used in Ex_Imgdraw
 
-const raylib::Vector2 ver_line_0_pos(130.0, 0.0);
+const raylib::Vector2 ver_line_0_pos(130.0f, 0.0f);
 
-const raylib::Vector2 ver_line_0_size(2.0, 450.0);
+const raylib::Vector2 ver_line_0_size(2.0f, 450.0f);
 
-const raylib::Vector2 ver_line_1_pos(100.0, 0.0);
+const raylib::Vector2 ver_line_1_pos(100.0f, 0.0f);
 
-const raylib::Vector2 ver_line_1_size(2.0, 30.0);
+const raylib::Vector2 ver_line_1_size(2.0f, 30.0f);
 
-const raylib::Vector2 hor_line_0_pos(0.0, 30.0);
+const raylib::Vector2 hor_line_0_pos(0.0f, 30.0f);
 
-const raylib::Vector2 hor_line_0_size(130.0, 2.0);
+const raylib::Vector2 hor_line_0_size(130.0f, 2.0f);
 
-const raylib::Vector2 hor_line_1_pos(0.0, 330.0);
+const raylib::Vector2 hor_line_1_pos(0.0f, 330.0f);
 
-const raylib::Vector2 hor_line_1_size(130.0, 2.0);
+const raylib::Vector2 hor_line_1_size(130.0f, 2.0f);
 
-const raylib::Vector2 help_background_pos(102.0, 0.0);
+const raylib::Vector2 help_background_pos(102.0f, 0.0f);
 
-const raylib::Vector2 help_background_size(26.0, 28.0);
+const raylib::Vector2 help_background_size(26.0f, 28.0f);
 
-const raylib::Vector2 game_view_pos(132.0, 0.0);
+const raylib::Vector2 game_view_pos(132.0f, 0.0f);
 
-const raylib::Vector2 game_view_size(768.0, 450.0);
+const raylib::Vector2 game_view_size(768.0f, 450.0f);
+
+const raylib::Vector2 dynamic_cursor_start_pos(25.0f, 338.0f);
+
+const raylib::Vector2 dynamic_cursor_size(2.0f, 18.0f);
+
+const raylib::Vector2 text_space_pos(0.0f, 332.0f);
+
+const raylib::Vector2 text_space_size(130.0f, 118.0f);
 
 const raylib::Color rayblue(149, 177, 204);
 
@@ -109,6 +117,20 @@ const raylib::Color midgrey(237, 237, 237);
 const raylib::Color textcolor(79, 101, 133);
 
 const char start_message[] = "Press Space to select a map \n\t\t\t and start the game!";
+
+const raylib::Vector2 message_start_pos(5.0f, 36.0f);
+
+const raylib::Vector2 CMD_list_start_pos(7.0f, 52.0f);
+
+const char reminder_message[] = "CMD-list:";
+
+const char warning_message[] = "Unknown cmd!";
+
+const int message_max_len = 10;
+
+const int CMD_list_max_len = 13;
+
+const int char_height_18 = 20;
 
 }
 

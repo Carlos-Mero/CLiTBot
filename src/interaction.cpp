@@ -28,7 +28,7 @@ void Ex_game::show_help_window(){
 
 void Ex_game::show_start_window(){
     
-    DrawText(cst::start_message, 340, 190, 26, cst::textcolor);
+    DrawText(TextSubtext(cst::start_message, 0, frame_count/4), 340, 190, 26, cst::textcolor);
     
     return;
 }

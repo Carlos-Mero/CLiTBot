@@ -170,31 +170,6 @@ void Ex_game::set_main_window(int width, int height, std::string title){
     main_window = new raylib::Window(width, height, title);
 }
 
-void Ex_game::grid_init(){
-    
-    ver_line_0 = new raylib::Rectangle(cst::ver_line_0_pos, cst::ver_line_0_size);
-    
-    ver_line_1 = new raylib::Rectangle(cst::ver_line_1_pos, cst::ver_line_1_size);
-    
-    hor_line_0 = new raylib::Rectangle(cst::hor_line_0_pos, cst::hor_line_0_size);
-    
-    hor_line_1 = new raylib::Rectangle(cst::hor_line_1_pos, cst::hor_line_1_size);
-    
-    game_space = new raylib::Rectangle(cst::game_view_pos, cst::game_view_size);
-    
-    help_background = new raylib::Rectangle(cst::help_background_pos, cst::help_background_size);
-    
-    help_text_color = RAYWHITE;
-    
-    help_background_color = cst::rayblue;
-    
-    help_index = 0;
-    
-    start_index = 1;
-    
-    return;
-}
-
 void Ex_game::draw_grid(){
     
     ver_line_0->Draw(cst::rayblue);
@@ -214,9 +189,23 @@ void Ex_game::draw_grid(){
 
 void Ex_game::draw_text(){
     
-    DrawText("GLiTBot!", 10, 7, 20, cst::rayblue);
+    DrawText("GLiTBot!", 10, 7, 20, cst::textcolor);
     
     DrawText("?", 108, 6, 20, help_text_color);
+    
+    DrawText(cst::reminder_message, cst::message_start_pos.GetX(), cst::message_start_pos.GetY(), 18, cst::textcolor);
+    
+    DrawText(">", cst::dynamic_cursor_start_pos.GetX() - 15.0f, cst::dynamic_cursor_start_pos.GetY(), 18, cst::textcolor);
+    
+    DrawText(TextFormat(input_chars, input_count, cst::message_max_len), cst::dynamic_cursor_start_pos.GetX(), cst::dynamic_cursor_start_pos.GetY(), 18, cst::textcolor);
+    
+    for (int i = 0; i < cst::CMD_list_max_len; i++) {
+        
+        DrawText(TextFormat("%02i.", i), 6.0f, cst::message_start_pos.GetY() + (i+1) * cst::char_height_18, 14, (i == command_list_index)? cst::textcolor : cst::raylightblue);
+        
+        DrawText(command_lists[i], 26.0f, cst::message_start_pos.GetY() + (i+1) * cst::char_height_18, 18, (i+1 == command_list_index)? cst::textcolor : cst::raylightblue);
+        
+    }
     
     return;
 }
