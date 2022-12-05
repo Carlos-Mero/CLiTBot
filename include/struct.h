@@ -138,6 +138,9 @@ public:
     // And it will bring about different results due to the variable m_cmd.
     // This is mainly be done in the seperated modules.
     
+    void run_command();
+    // This function detects and runs the current command.
+    
     void set_map();
     // This function generates and sets the map for the game.
     

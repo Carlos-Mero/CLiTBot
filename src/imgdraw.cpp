@@ -201,9 +201,9 @@ void Ex_game::draw_text(){
     
     for (int i = 0; i < cst::CMD_list_max_len; i++) {
         
-        DrawText(TextFormat("%02i.", i), 6.0f, cst::message_start_pos.GetY() + (i+1) * cst::char_height_18, 14, (i == command_list_index)? cst::textcolor : cst::raylightblue);
+        DrawText(TextFormat("%02i.", i), 6.0f, cst::message_start_pos.GetY() + (i+1) * cst::char_height_18, 14, (i == (command_list_index%cst::CMD_list_max_len))? cst::textcolor : cst::raylightblue);
         
-        DrawText(command_lists[i], 26.0f, cst::message_start_pos.GetY() + (i+1) * cst::char_height_18, 18, (i+1 == command_list_index)? cst::textcolor : cst::raylightblue);
+        DrawText(command_lists[i], 26.0f, cst::message_start_pos.GetY() + (i+1) * cst::char_height_18, 18, (i+1 == (command_list_index%cst::CMD_list_max_len))? cst::textcolor : cst::raylightblue);
         
     }
     
