@@ -76,6 +76,10 @@ const BMPInfoHeader BIH = {0x28, SCREEN_WIDTH - WIDGET_WIDTH, SCREEN_HEIGHT, 1, 
 
 // MARK: Used in Ex_Imgdraw
 
+const int image_count = 17;
+
+const std::string img_path = "../resources/";
+
 const raylib::Vector2 ver_line_0_pos(130.0f, 0.0f);
 
 const raylib::Vector2 ver_line_0_size(2.0f, 450.0f);
@@ -125,6 +129,8 @@ const raylib::Vector2 CMD_list_start_pos(7.0f, 52.0f);
 const char reminder_message[] = "CMD-list:";
 
 const char warning_message[] = "Unknown cmd!";
+
+const std::string file_error_message = "发生了一些错误，文件没能正常打开？！";
 
 const int message_max_len = 10;
 

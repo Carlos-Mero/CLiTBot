@@ -91,9 +91,73 @@ void Game::process(){
 
 // MARK: Extended features
 
-// MARK: Initializer for the interface
-
 void Ex_game::grid_init(){
+    
+    // MARK: Initializer of the game
+    
+    pics = new raylib::Image[17];
+    
+    m_font = GetFontDefault();
+    
+    pics[0] = raylib::Image(cst::img_path + "cell.png");
+    
+    pics[1] = raylib::Image(cst::img_path + "light.png");
+    
+    pics[2] = raylib::Image(cst::img_path + "light_lit.png");
+    
+    pics[3] = raylib::Image(cst::img_path + "bot_up_stand.png");
+    
+    pics[4] = raylib::Image(cst::img_path + "bot_up_walk_1.png");
+    
+    pics[5] = raylib::Image(cst::img_path + "bot_up_walk_2.png");
+    
+    pics[6] = raylib::Image(cst::img_path + "bot_left_stand.png");
+    
+    pics[7] = raylib::Image(cst::img_path + "bot_left_walk_1.png");
+    
+    pics[8] = raylib::Image(cst::img_path + "bot_left_walk_2.png");
+    
+    pics[9] = raylib::Image(cst::img_path + "bot_down_stand.png");
+    
+    pics[10] = raylib::Image(cst::img_path + "bot_down_walk_1.png");
+    
+    pics[11] = raylib::Image(cst::img_path + "bot_down_walk_2.png");
+    
+    pics[12] = raylib::Image(cst::img_path + "bot_right_stand.png");
+    
+    pics[13] = raylib::Image(cst::img_path + "bot_right_walk_1.png");
+    
+    pics[14] = raylib::Image(cst::img_path + "bot_right_walk_2.png");
+    
+    pics[15] = raylib::Image(cst::img_path + "bot_lit_1.png");
+    
+    pics[16] = raylib::Image(cst::img_path + "bot_lit_2.png");
+    
+    help_stream = new std::ifstream;
+    
+    help_stream->open("../maps/help.txt", std::ios::in);
+    
+    if (!help_stream->is_open()) {
+        std::cout << cst::file_error_message << std::endl;
+        m_running = false;
+        return;
+    }
+    
+    std::string temp_str;
+    char buf[1024];
+    
+    temp_str = "";
+    
+    while (help_stream->getline(buf, sizeof(buf))) {
+        temp_str += (std::string)buf;
+        temp_str += "\n";
+    }
+    
+    help_text = new raylib::Text(m_font, temp_str, 17.0f, 1.0f, cst::textcolor);
+    
+    help_stream->close();
+    
+    delete help_stream;
     
     ver_line_0 = new raylib::Rectangle(cst::ver_line_0_pos, cst::ver_line_0_size);
     
@@ -194,14 +258,15 @@ void Ex_game::ex_process(){
     
     if (IsKeyPressed(KEY_SPACE)) {
         start_index = false;
+        help_index = 0;
     }
     
     if (text_space->CheckCollision(mouse_pos) && raylib::Mouse::IsButtonPressed(MOUSE_BUTTON_LEFT)) {
-        text_selected = 1;
+        text_selected = true;
     }
     
     if (!text_space->CheckCollision(mouse_pos) && raylib::Mouse::IsButtonPressed(MOUSE_BUTTON_LEFT)) {
-        text_selected = 0;
+        text_selected = false;
     }
     
     if (frame_count/32 % 2 && text_selected) {

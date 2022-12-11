@@ -37,7 +37,7 @@ void Game::op_map(std::string file_name){
     if(!mapfile.is_open()||!bot_img.is_open()){
         mapfile.close();
 		bot_img.close();
-        std::cout << "发生了一些意外……文件没能正常打开？！" << std::endl;
+        std::cout << cst::file_error_message << std::endl;
         return;
     }
     

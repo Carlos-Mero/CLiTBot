@@ -19,6 +19,8 @@ int main_ex(){
     {
         game->ex_process();
         
+        // MARK: Drawing process
+        
         BeginDrawing();
 
         game->get_main_window()->ClearBackground(RAYWHITE);

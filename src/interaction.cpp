@@ -3,6 +3,7 @@
 #include "struct.h"
 #include "const.h"
 #include <iostream>
+#include <fstream>
 
 // MARK: Standard features
 
@@ -22,6 +23,8 @@ void Game::op_info(){
 // MARK: Extended features
 
 void Ex_game::show_help_window(){
+    
+    help_text->Draw(cst::game_view_pos.GetX() + 8.0f, cst::game_view_pos.GetY() + 8.0f);
     
     return;
 }

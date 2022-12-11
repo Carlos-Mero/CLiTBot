@@ -1,0 +1,18 @@
+Here are the available commands in the game, check before starting~
+You can press Enter to commit the command, and after that,
+you should input the parameters of the command.
+
+LOAD <MAP_PATH>: This cmd initializes the map for the game.
+You can also press space to select a map through GUI.
+
+OP <OP_NAME>: This cmd will begin editing mode of the cmd-list.
+You can write anything you want in the CLI.
+
+RUN <OP_NAME>: This will guide you to the operating mode. Here you can input the name of
+the cmd-list to commit the cmd there, and you can also directly enter command to the bot.
+
+ESC: This will help you return to the initial mode of the game.
+This won't be too confusing if you are familiar with the editor Vim.
+
+EXIT: This will close the game.
+For more details, see README.md in the root folder.

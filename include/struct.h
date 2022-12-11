@@ -5,6 +5,7 @@
 // These pro-compilation instructions are used to avoid redefinition of the structures below.
 
 #include <string>
+#include <fstream>
 #include "raylib-cpp.hpp"
 
 // MARK: Common Structures
@@ -198,14 +199,39 @@ struct pix{
 
 // MARK: Extended structures
 
+enum image{
+    cell = 0,
+    light = 1,
+    light_lit = 2,
+    bot_up_stand = 3,
+    bot_up_walk_1 = 4,
+    bot_up_walk_2 = 5,
+    bot_left_stand = 6,
+    bot_left_walk_1 = 7,
+    bot_left_walk_2 = 8,
+    bot_down_stand = 9,
+    bot_down_walk_1 = 10,
+    bot_down_walk_2 = 11,
+    bot_right_stand = 12,
+    bot_right_walk_1 = 13,
+    bot_right_walk_2 = 14,
+    bot_lit_1 = 15,
+    bot_lit_2 = 16,
+    none = 17
+};
+
 class Ex_game : public Game{
     
 protected:
     
     raylib::Window * main_window;
     
-    raylib::Vector2 mouse_pos;
+    raylib::Font m_font;
     
+    raylib::Image * pics;
+    
+    raylib::Vector2 mouse_pos;
+     
     raylib::Rectangle * ver_line_0;
     
     raylib::Rectangle * ver_line_1;
@@ -229,6 +255,10 @@ protected:
     raylib::Color help_background_color;
     
     int help_index;
+    
+    std::ifstream * help_stream;
+    
+    raylib::Text * help_text;
     
     bool start_index;
     
@@ -268,6 +298,7 @@ public:
     
     ~Ex_game(){
         delete main_window;
+        delete pics;
         delete ver_line_0;
         delete ver_line_1;
         delete hor_line_0;
