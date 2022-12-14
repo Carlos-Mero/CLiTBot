@@ -13,6 +13,8 @@ void Bot::move() {
     return;
 }
 
+void Bot::jump() { return; }
+
 void Bot::turn(Direction d) {
     // This function changes the direction of the bot.
 
@@ -59,7 +61,7 @@ void Bot::turn(Direction d) {
     return;
 }
 
-void Map::light_lit(Position &pos) {
+void Map::light_lit(Position pos) {
     // This function is called when the player uses the "LIT" command.
     // This will light the light at that position, and decreases the light_count
     // by 1.
@@ -98,7 +100,9 @@ void Ex_game::grid_init() {
 
     // MARK: Initializer of the game
 
-    pics = new raylib::Image[17];
+    pics = new raylib::Image[cst::image_count];
+
+    tx = new raylib::Texture[cst::image_count];
 
     m_font = GetFontDefault();
 
@@ -135,6 +139,15 @@ void Ex_game::grid_init() {
     pics[15] = raylib::Image(cst::img_path + "bot_lit_1.png");
 
     pics[16] = raylib::Image(cst::img_path + "bot_lit_2.png");
+
+    for (int i = 0; i < cst::image_count; i++) {
+        pics[i].Format(PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
+        tx[i] = pics[i].LoadTexture();
+    }
+
+    delete[] pics;
+    // This loads the images used in the game, and convert them for GPU to
+    // process.
 
     help_stream = new std::ifstream;
 
@@ -214,7 +227,7 @@ void Ex_game::input_process() {
 
     while (key > 0) {
 
-        if ((key >= 32) && (key <= 125) &&
+        if ((key >= 32) && (key <= 125) && (key != KEY_SPACE) &&
             (input_count < cst::message_max_len)) {
 
             input_chars[input_count] = (char)key;
@@ -270,7 +283,8 @@ void Ex_game::ex_process() {
 
     if (IsKeyPressed(KEY_SPACE)) {
         start_index = false;
-        help_index  = 0;
+        map_selection();
+        help_index = 0;
     }
 
     if (text_space->CheckCollision(mouse_pos) &&
@@ -295,3 +309,7 @@ void Ex_game::ex_process() {
 
     return;
 }
+
+// MARK: Map_selection_process
+
+void Ex_game::map_selection() { return; }

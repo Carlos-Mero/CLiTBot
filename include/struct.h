@@ -65,6 +65,11 @@ class Bot {
     void move();
     // We can call these methods to change the position of the bot.
 
+    void jump();
+    // We can call this method when we want to make the bot "jump".
+    // This will change the height of the bot but doesn't change its position at
+    // the same time.
+
     void turn(enum Direction d);
     // we can call this method to change the direction of the bot.
 
@@ -100,12 +105,14 @@ class Map {
     // This is the number of lights still remains on the map.
 
   public:
-    void light_lit(Position &pos);
+    void light_lit(Position pos);
     // This function is called when the player uses the "LIT" command.
     // This will light the light at that position, and decreases the light_count
     // by 1.
 
-    int is_not_cleared() { return m_light_count; }
+    Light *lights() { return m_lights; }
+
+    int light_count() { return m_light_count; }
     // This function is used to judge whether the lights in the map are all lit
     // up. Its return value is used as the type bool.
 
@@ -113,7 +120,8 @@ class Map {
 
     int cells_count() { return m_cell_count; }
 
-    Map(Cell *cells, Light *lights, int light_count, std::string name);
+    Map(Cell *cells, Light *lights, int cell_count, int light_count,
+        std::string name);
     // This function is used to construct the map of the game using the initial
     // values of the related variables.
     ~Map() {
@@ -253,6 +261,8 @@ class Ex_game : public Game {
 
     raylib::Image *pics;
 
+    raylib::Texture *tx;
+
     raylib::Vector2 mouse_pos;
 
     raylib::Rectangle *ver_line_0;
@@ -293,6 +303,10 @@ class Ex_game : public Game {
     char command_lists[13][11];
     int  command_list_index;
 
+    int moving_index;
+    int jumping_index;
+    int lighting_index;
+
   public:
     void ex_process();
 
@@ -303,6 +317,8 @@ class Ex_game : public Game {
     void grid_init();
 
     void draw_grid();
+
+    void map_selection();
 
     void draw_text();
 
@@ -319,18 +335,6 @@ class Ex_game : public Game {
     raylib::Window *get_main_window() { return main_window; }
 
     Ex_game(std::string path, int cmd_lim, Map *map = NULL, Bot *bot = NULL);
-
-    ~Ex_game() {
-        delete main_window;
-        delete pics;
-        delete ver_line_0;
-        delete ver_line_1;
-        delete hor_line_0;
-        delete hor_line_1;
-        delete help_background;
-        delete dynamic_curser;
-        delete text_space;
-    };
 };
 
 #endif

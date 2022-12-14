@@ -18,6 +18,7 @@ int main_ex() {
     SetTargetFPS(cst::TARGET_FPS);
 
     while (game->is_running()) {
+
         game->ex_process();
 
         // MARK: Drawing process
@@ -40,6 +41,7 @@ int main_ex() {
             continue;
         } else {
             game->show_game_view();
+            EndDrawing();
             continue;
         }
 

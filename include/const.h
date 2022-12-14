@@ -137,6 +137,18 @@ const raylib::Vector2 message_start_pos(5.0f, 36.0f);
 
 const raylib::Vector2 CMD_list_start_pos(7.0f, 52.0f);
 
+const raylib::Vector2 cell_pos_delta_x(51.0f, -35.0f);
+
+const raylib::Vector2 cell_pos_delta_y(51.0f, 35.0f);
+
+const raylib::Vector2 cell_pos_delta_h(0.0f, -30.0f);
+
+const raylib::Vector2 bot_pos_delta(27.5f, -60.0f);
+
+const raylib::Vector2 center_float(-100.0f, -40.0f);
+
+const raylib::Vector2 light_delta(46.0f, -183.0f);
+
 const char reminder_message[] = "CMD-list:";
 
 const char warning_message[] = "Unknown cmd!";

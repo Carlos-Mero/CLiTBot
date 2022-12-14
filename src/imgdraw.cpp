@@ -247,3 +247,150 @@ void Ex_game::draw_text() {
 
     return;
 }
+
+void Ex_game::show_game_view() {
+
+    raylib::Vector2 plt_center =
+        cst::game_view_pos + cst::game_view_size / 2 + cst::center_float;
+
+    for (int i = 0; i < m_map->cells_count(); i++) {
+        if (m_map->cells()[i].pos.h > m_bot->current_position().h) {
+            continue;
+        }
+        tx[cell].Draw(plt_center +
+                      cst::cell_pos_delta_x * m_map->cells()[i].pos.x +
+                      cst::cell_pos_delta_y * m_map->cells()[i].pos.y +
+                      cst::cell_pos_delta_h * m_map->cells()[i].pos.h);
+    }
+    // This draws the cells below the bot.
+    
+    // We will then draw the light to the map, depending on their lit_id
+    for (int i = 0; i < m_map->light_count(); i++) {
+        if (m_map->lights()[i].turned_on) {
+            tx[light_lit].Draw(
+                plt_center + cst::cell_pos_delta_x * m_map->lights()[i].pos.x +
+                cst::cell_pos_delta_y * m_map->lights()[i].pos.y +
+                cst::cell_pos_delta_h * m_map->lights()[i].pos.h +
+                cst::light_delta);
+        } else {
+            tx[light].Draw(plt_center +
+                           cst::cell_pos_delta_x * m_map->lights()[i].pos.x +
+                           cst::cell_pos_delta_y * m_map->lights()[i].pos.y +
+                           cst::cell_pos_delta_h * m_map->lights()[i].pos.h +
+                           cst::light_delta);
+        }
+    }
+
+    int bot_status;
+
+    raylib::Vector2 bot_pos_delta = cst::bot_pos_delta;
+
+    // Here we choose the texture due to the status of the bot.
+
+    switch (m_bot->current_direction()) {
+    case up:
+        bot_status = 3;
+        break;
+    case left:
+        bot_status = 6;
+        break;
+    case down:
+        bot_status = 9;
+        break;
+    case right:
+        bot_status = 12;
+        break;
+
+    default:
+        break;
+    }
+
+    // This handles moving process
+    if (moving_index > 0) {
+        moving_index++;
+        moving_index %= 33;
+        bot_status = bot_status + (moving_index / 16 + 1) % 3;
+        switch (m_bot->current_direction()) {
+        case up:
+            bot_pos_delta = bot_pos_delta - cst::cell_pos_delta_y *
+                                                ((float)moving_index / 33.0f);
+            break;
+        case down:
+            bot_pos_delta = bot_pos_delta + cst::cell_pos_delta_y *
+                                                ((float)moving_index / 33.0f);
+            break;
+
+        case left:
+            bot_pos_delta = bot_pos_delta - cst::cell_pos_delta_x *
+                                                ((float)moving_index / 33.0f);
+            break;
+        case right:
+            bot_pos_delta = bot_pos_delta + cst::cell_pos_delta_x *
+                                                ((float)moving_index / 33.0f);
+            break;
+
+        default:
+            break;
+        }
+        if (moving_index == 32) {
+            m_bot->move();
+        }
+    }
+
+    // This handles the jumping process
+    if (jumping_index != 0) {
+        // Here we declare that jumping_index > 0 means that the bot is jumping
+        // up, and minus value means jumping down.
+        moving_index = 1;
+        // This will recall the process before, and handle the horizenal move of
+        // the bot.
+        if (jumping_index < 0) {
+            jumping_index++;
+            jumping_index %= 33;
+            bot_pos_delta += cst::cell_pos_delta_h *
+                             (1 - pow(jumping_index + 13.669f, 2) / 186.84286);
+        } else {
+            jumping_index--;
+            jumping_index %= 33;
+            bot_pos_delta +=
+                cst::cell_pos_delta_h *
+                (2 - pow(jumping_index - 19.33095f, 2) / 373.68572f);
+        }
+
+        if (jumping_index == 32 || jumping_index == -32) {
+            m_bot->jump();
+        }
+    }
+
+    // This is the lighting animation.
+    if (lighting_index > 0) {
+        lighting_index++;
+        lighting_index %= 33;
+        if (lighting_index <= 11) {
+            bot_status = bot_lit_1;
+        } else if (lighting_index > 11 && lighting_index < 22) {
+            bot_status = bot_lit_2;
+        } else {
+            bot_status = bot_lit_1;
+        }
+        m_map->light_lit(m_bot->current_position());
+    }
+
+    tx[bot_status].Draw(
+        plt_center + cst::cell_pos_delta_x * m_bot->current_position().x +
+        cst::cell_pos_delta_y * m_bot->current_position().y +
+        cst::cell_pos_delta_h * m_bot->current_position().h + bot_pos_delta);
+
+    for (int i = 0; i < m_map->cells_count(); i++) {
+        if (m_map->cells()[i].pos.h <= m_bot->current_position().h) {
+            continue;
+        }
+        tx[cell].Draw(plt_center +
+                      cst::cell_pos_delta_x * m_map->cells()[i].pos.x +
+                      cst::cell_pos_delta_y * m_map->cells()[i].pos.y +
+                      cst::cell_pos_delta_h * m_map->cells()[i].pos.h);
+    }
+    // This draws the cells above the bot.
+
+    return;
+}
