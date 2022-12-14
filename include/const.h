@@ -3,12 +3,13 @@
 #define _CONSTS_IN_THE_GAME_
 
 #include <string>
-#include "struct.h"
+
 #include "raylib-cpp.hpp"
+#include "struct.h"
 
 // MARK: Constants
 
-namespace cst{
+namespace cst {
 
 const std::string PROJ_NAME = "CLiTBot!";
 
@@ -70,9 +71,18 @@ const std::string path_to_bot_right = "./resources/bot_right.bmp";
 
 const std::string path_to_bot_left = "./resources/bot_left.bmp";
 
-const BMPFileHeader BFH = {0x4D42, (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT * 3 + 0x36, 0, 0, 0x36};
+const BMPFileHeader BFH = {
+    0x4D42, (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT * 3 + 0x36, 0, 0,
+    0x36};
 
-const BMPInfoHeader BIH = {0x28, SCREEN_WIDTH - WIDGET_WIDTH, SCREEN_HEIGHT, 1, 24, 0, (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT, {0}};
+const BMPInfoHeader BIH = {0x28,
+                           SCREEN_WIDTH - WIDGET_WIDTH,
+                           SCREEN_HEIGHT,
+                           1,
+                           24,
+                           0,
+                           (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT,
+                           {0}};
 
 // MARK: Used in Ex_Imgdraw
 
@@ -120,7 +130,8 @@ const raylib::Color midgrey(237, 237, 237);
 
 const raylib::Color textcolor(79, 101, 133);
 
-const char start_message[] = "Press Space to select a map \n\t\t\t and start the game!";
+const char start_message[] =
+    "Press Space to select a map \n\t\t\t and start the game!";
 
 const raylib::Vector2 message_start_pos(5.0f, 36.0f);
 
@@ -138,6 +149,6 @@ const int CMD_list_max_len = 13;
 
 const int char_height_18 = 20;
 
-}
+} // namespace cst
 
 #endif
