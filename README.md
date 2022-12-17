@@ -8,15 +8,21 @@
 
 ### 编译指导
 
-目前我们采用CMake实现跨平台构建方案，其中使用到了外部库[raylib](https://github.com/raysan5/raylib)实现图形绘制，并应用pkg-config进行库管理。在开始构建项目前需要首先安装raylib游戏引擎（约2MB）以及pkg-config。此后在此项目文件夹中打开命令行，依次输入：
+目前我们采用CMake实现跨平台构建方案，其中使用到了外部库[raylib](https://github.com/raysan5/raylib)实现图形绘制，并应用pkg-config进行库管理。在开始构建项目前需要首先安装raylib游戏引擎（约2MB）以及pkg-config。
 
-```
+对于macOS以及Linux用户，只需在相关依赖安装完毕后在此项目文件夹中打开命令行，依次输入：
+
+```shell
 mkdir build
 cd build && cmake ..
 make
 ```
 
 由此即可完成项目构建。
+
+对于Windows平台，我们可以采用如下的替代方案。
+
+（……未完待续）
 
 此外，本项目的release页面也有macOS版本的预编译程序可供下载游玩（ARM64架构）。
 
@@ -31,3 +37,5 @@ make
 ```
 
 指令运行游戏可以解决这一问题。我们还在寻找解决方案。
+
+最后，因为时间以及制作者能力有限，大作业最终效果尚且相当粗糙，还望体谅。
