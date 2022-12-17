@@ -195,8 +195,6 @@ void Ex_game::set_main_window(int width, int height, std::string title) {
     main_window = new raylib::Window(width, height, title);
 }
 
-// MARK: Graphic interface
-
 void Ex_game::draw_grid() {
 
     ver_line_0->Draw(cst::rayblue);
@@ -249,8 +247,6 @@ void Ex_game::draw_text() {
 
     return;
 }
-
-// MARK: Game_view
 
 void Ex_game::show_game_view() {
 
