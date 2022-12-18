@@ -19,7 +19,7 @@ const int MAX_COL = 100;
 
 const int MAX_LIGHTS = 15;
 
-const int CMD_LIM = 50;
+const int CMD_LIM = -1;
 
 const std::string SAVE_PATH = "./output/";
 

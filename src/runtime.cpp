@@ -9,11 +9,42 @@
 
 void Bot::move() {
     // This function moves the bot.
+    switch (m_dir) {
+    case up:
+        m_pos.y--;
+        break;
+    case left:
+        m_pos.x--;
+        break;
+    case down:
+        m_pos.y++;
+        break;
+    case right:
+        m_pos.x++;
+        break;
 
+    default:
+        break;
+    }
     return;
 }
 
-void Bot::jump() { return; }
+void Bot::jump(Direction d) {
+
+    switch (d) {
+    case up:
+        m_pos.h++;
+        break;
+    case down:
+        m_pos.h--;
+        break;
+
+    default:
+        break;
+    }
+
+    return;
+}
 
 void Bot::turn(Direction d) {
     // This function changes the direction of the bot.
@@ -66,21 +97,126 @@ void Map::light_lit(Position pos) {
     // This will light the light at that position, and decreases the light_count
     // by 1.
 
-    m_light_count--;
+    for (int i = 0; i < m_light_count; i++) {
+        if (pos.x == m_lights[i].pos.x && pos.y == m_lights[i].pos.y &&
+            !m_lights[i].turned_on) {
+            m_lights[i].turned_on = true;
+            goto Success;
+        }
+    }
+
+    std::cout << "不行，这里没有需要点亮的灯……" << std::endl;
+    return;
+
+Success:
+
+    m_light_remaining--;
     return;
 }
 
-void Game::set_map() {
+void Game::set_map(std::string map_path) {
     // This method loads the map into the game class.
     // Use the "new" operator and construct a map object, then assign the
     // pointer to it to the variable m_map.
 
+    std::ifstream map_file;
+    map_file.open("../" + map_path);
+
+    m_map = new Map();
+    std::string temp_s;
+    map_file >> temp_s;
+    m_map->set_name(temp_s);
+    // This is the first line in the map file.
+    map_file >> m_map->m_row >> m_map->m_col >> m_map->m_cell_count >>
+        m_map->m_light_count;
+    map_file >> m_cmd_lim;
+    // This is the second line.
+    // We can lately write the map file using the input order here.
+
+    m_map->m_light_remaining = m_map->m_light_count;
+
+    Cell  *temp_cells  = new Cell[m_map->m_cell_count];
+    Light *temp_lights = new Light[m_map->m_light_count];
+
+    int temp  = 0;
+    int count = 0;
+
+    for (int i = 0; i < m_map->m_row * m_map->m_col; i++) {
+        map_file >> temp;
+        if (temp == 0) {
+            continue;
+        } else {
+            temp_cells[count].pos.h = temp - 1;
+            temp_cells[count].pos.y = i / m_map->m_col - m_map->m_row / 2;
+            temp_cells[count].pos.x = i % m_map->m_col - m_map->m_col / 2;
+            // Here the position of the bot can have a minus value, this refers
+            // to the distance to the center of the view.
+            count++;
+        }
+    }
+
+    count = 0;
+    for (int i = 0; i < m_map->m_light_count; i++) {
+        map_file >> temp;
+        temp_lights[count].pos.x = temp - m_map->m_col / 2;
+        map_file >> temp;
+        temp_lights[count].pos.y = temp - m_map->m_row / 2;
+        count++;
+    }
+
+    m_map->set_cells(temp_cells);
+    m_map->set_lights(temp_lights);
+
+    map_file.close();
+
     return;
 }
 
-void Game::set_bot() {
+void Game::set_bot(std::string map_path) {
     // This will set a value of the variable m_bot, just like what the function
     // above does.
+
+    std::ifstream map_file;
+    map_file.open("../" + map_path);
+
+    Position  temp_pos;
+    Direction temp_dir;
+
+    int  num;
+    char buff[1024];
+
+    map_file.getline(buff, sizeof(buff));
+    map_file.getline(buff, sizeof(buff));
+
+    for (int i = 0; i < m_map->m_row + m_map->m_light_count; i++) {
+        map_file.getline(buff, sizeof(buff));
+    }
+
+    map_file >> temp_pos.x >> temp_pos.y >> temp_pos.h;
+    temp_pos.h--;
+    map_file >> num;
+
+    switch (num) {
+    case 0:
+        temp_dir = up;
+        break;
+    case 1:
+        temp_dir = left;
+        break;
+    case 2:
+        temp_dir = down;
+        break;
+    case 3:
+        temp_dir = right;
+        break;
+
+    default:
+        break;
+    }
+
+    m_bot = new Bot(temp_pos, temp_dir);
+
+    map_file.close();
 
     return;
 }
@@ -90,6 +226,53 @@ void Game::process() {
     // It will need the cooperation of all three modules of the game.
     // In this function we may need to call many other methods of the class
     // Game. All variables in this game will be updated here in this method.
+
+   if (m_cmd_lim != 0) {
+        cin_cmd();
+        run_command();
+    } else if (m_cmd_lim == 0) {
+        std::cout << "指令数已达到上限，游戏失败（悲" << std::endl;
+        std::cout << "可以使用LOAD命令重新开始，或者按下control+C结束游戏"
+                  << std::endl;
+    }
+
+    return;
+}
+
+void Game::run_command() {
+    // This function handles the command inputed here.
+
+    if (m_cmd == "LOAD") {
+        std::cin >> m_cmd;
+        // Here, m_cmd is temperarily uesd to store the path to the map.
+        set_map(m_cmd);
+        set_bot(m_cmd);
+        std::cout << "地图已加载完毕！" << std::endl;
+    } else if (m_cmd == "AUTOSAVE") {
+        std::cin >> m_cmd;
+        if (m_cmd == "ON") {
+            m_auto_save_id = true;
+        } else if (m_cmd == "OFF") {
+            m_auto_save_id = false;
+        } else {
+            std::cout << "输入参数有误" << std::endl;
+        }
+    } else if (m_cmd == "LIMIT") {
+        std::cin >> m_cmd_lim;
+    } else if (m_cmd == "STATUS") {
+        op_info();
+    } else if (m_cmd == "OP") {
+        // MARK: TODO
+    } else if (m_cmd == "RUN") {
+        // MARK: TODO
+    } else if (m_cmd == "HELP") {
+        show_help();
+    } else if (m_cmd == "EXIT") {
+        std::cout << "感谢您的游玩！" << std::endl;
+        m_running = false;
+    } else {
+        std::cout << "很抱歉，我不太懂这个指令是什么意思……" << std::endl;
+    }
 
     return;
 }

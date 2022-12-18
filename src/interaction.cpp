@@ -10,6 +10,34 @@
 void Game::cin_cmd() {
     // This function handles the interaction with the player.
     // It recieves the command and send it to the process method.
+    std::cout << "请输入下一步指令" << std::endl;
+    std::cin >> m_cmd;
+
+    return;
+}
+
+void Game::show_help() {
+
+    char         buff[1024];
+    std::fstream text;
+    
+    std::cout << std::endl;
+    
+    for (int i = 0; i < 11; i++) {
+        std::cout << "---";
+    }
+    std::cout << std::endl;
+    text.open("../maps/help_cli.txt");
+
+    while (text.getline(buff, sizeof(buff))) {
+        std::cout << buff << std::endl;
+    }
+    
+    for (int i = 0; i < 11; i++) {
+        std::cout << "---";
+    }
+    std::cout << std::endl << std::endl;
+    text.close();
 
     return;
 }

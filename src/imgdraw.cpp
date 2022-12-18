@@ -263,7 +263,7 @@ void Ex_game::show_game_view() {
                       cst::cell_pos_delta_h * m_map->cells()[i].pos.h);
     }
     // This draws the cells below the bot.
-    
+
     // We will then draw the light to the map, depending on their lit_id
     for (int i = 0; i < m_map->light_count(); i++) {
         if (m_map->lights()[i].turned_on) {
@@ -357,8 +357,10 @@ void Ex_game::show_game_view() {
                 (2 - pow(jumping_index - 19.33095f, 2) / 373.68572f);
         }
 
-        if (jumping_index == 32 || jumping_index == -32) {
-            m_bot->jump();
+        if (jumping_index == 32) {
+            m_bot->jump(up);
+        } else if (jumping_index == -32) {
+            m_bot->jump(down);
         }
     }
 

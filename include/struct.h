@@ -65,7 +65,7 @@ class Bot {
     void move();
     // We can call these methods to change the position of the bot.
 
-    void jump();
+    void jump(Direction d);
     // We can call this method when we want to make the bot "jump".
     // This will change the height of the bot but doesn't change its position at
     // the same time.
@@ -92,19 +92,19 @@ class Map {
     // These are the cells on the map, which at most counts 100 rows and 100
     // columns.
 
+    Light *m_lights;
+    // This is the list of the lights on the map.
+
+  public:
     int m_cell_count;
     // This variable describes the number of the cells in our game.
 
     int m_row, m_col;
     // These are the rows and columns actually used in the exact map.
-
-    Light *m_lights;
-    // This is the list of the lights on the map.
-
     int m_light_count;
+    int m_light_remaining;
     // This is the number of lights still remains on the map.
 
-  public:
     void light_lit(Position pos);
     // This function is called when the player uses the "LIT" command.
     // This will light the light at that position, and decreases the light_count
@@ -118,10 +118,26 @@ class Map {
 
     Cell *cells() { return m_cells; }
 
+    void set_cells(Cell *c) {
+        m_cells = c;
+        return;
+    }
+
+    void set_lights(Light *l) {
+        m_lights = l;
+        return;
+    }
+
+    void set_name(std::string s) {
+        m_name = s;
+        return;
+    }
+
     int cells_count() { return m_cell_count; }
 
     Map(Cell *cells, Light *lights, int cell_count, int light_count,
         std::string name);
+    Map() {}
     // This function is used to construct the map of the game using the initial
     // values of the related variables.
     ~Map() {
@@ -167,6 +183,10 @@ class Game {
     // This function handles the output of the information due to the command
     // sent in.
 
+    void show_help();
+    // This reads from the help text in the map folder and shows them in the
+    // command line interface.
+
     void process();
     // This function is called to process and update the situation of the game.
     // And it will bring about different results due to the variable m_cmd.
@@ -175,10 +195,10 @@ class Game {
     void run_command();
     // This function detects and runs the current command.
 
-    void set_map();
+    void set_map(std::string map_path);
     // This function generates and sets the map for the game.
 
-    void set_bot();
+    void set_bot(std::string map_path);
     // This function sets the bot in the game.
 
     void op_map(std::string file_name = "save.bmp");
