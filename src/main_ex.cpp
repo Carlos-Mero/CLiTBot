@@ -23,7 +23,7 @@ int main_ex() {
 
         // MARK: Drawing process
 
-        BeginDrawing();
+        game->get_main_window()->BeginDrawing();
 
         game->get_main_window()->ClearBackground(RAYWHITE);
 
@@ -33,19 +33,19 @@ int main_ex() {
 
         if (game->should_show_help()) {
             game->show_help_window();
-            EndDrawing();
+            game->get_main_window()->EndDrawing();
             continue;
         } else if (game->should_show_start_window()) {
             game->show_start_window();
-            EndDrawing();
+            game->get_main_window()->EndDrawing();
             continue;
         } else {
             game->show_game_view();
-            EndDrawing();
+            game->get_main_window()->EndDrawing();
             continue;
         }
 
-        EndDrawing();
+        game->get_main_window()->EndDrawing();
     }
 
     game->get_main_window()->Close();

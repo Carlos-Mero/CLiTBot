@@ -120,7 +120,15 @@ void Game::set_map(std::string map_path) {
     // pointer to it to the variable m_map.
 
     std::ifstream map_file;
-    map_file.open("../" + map_path);
+    map_file.open(map_path);
+    
+    if (!map_file.is_open()) {
+        std::cout << "地图载入失败……请检查路径输入是否正确" << std::endl;
+        return;
+    }
+    
+    int temp = 0;
+    int count = 0;
 
     m_map = new Map();
     std::string temp_s;
@@ -132,35 +140,48 @@ void Game::set_map(std::string map_path) {
     map_file >> m_cmd_lim;
     // This is the second line.
     // We can lately write the map file using the input order here.
+    
+    map_file >> proc_available;
+    
+    for (int i = 0; i < proc_available; i++) {
+        map_file >> proc_lim[i];
+    }
 
     m_map->m_light_remaining = m_map->m_light_count;
 
     Cell  *temp_cells  = new Cell[m_map->m_cell_count];
     Light *temp_lights = new Light[m_map->m_light_count];
 
-    int temp  = 0;
-    int count = 0;
+    int *temps = new int[m_map->m_col];
 
-    for (int i = 0; i < m_map->m_row * m_map->m_col; i++) {
-        map_file >> temp;
-        if (temp == 0) {
-            continue;
-        } else {
-            temp_cells[count].pos.h = temp - 1;
-            temp_cells[count].pos.y = i / m_map->m_col - m_map->m_row / 2;
-            temp_cells[count].pos.x = i % m_map->m_col - m_map->m_col / 2;
-            // Here the position of the bot can have a minus value, this refers
-            // to the distance to the center of the view.
-            count++;
+    for (int i = 0; i < m_map->m_row; i++) {
+        for (int j = 0; j < m_map->m_col; j++) {
+            map_file >> temps[j];
+        }
+        for (int j = m_map->m_col-1; j >= 0; j--) {
+            temp = -1;
+            while (temp < temps[j] - 1) {
+                temp++;
+                temp_cells[count].pos.h = temp;
+                temp_cells[count].pos.y = i - m_map->m_row / 2 + 1;
+                temp_cells[count].pos.x = j - m_map->m_col / 2 + 1;
+                // Here the position of the bot can have a minus value, this refers
+                // to the distance to the center of the view.
+                count++;
+            }
         }
     }
+    
+    delete[] temps;
 
     count = 0;
     for (int i = 0; i < m_map->m_light_count; i++) {
         map_file >> temp;
-        temp_lights[count].pos.x = temp - m_map->m_col / 2;
+        temp_lights[count].pos.x = temp - m_map->m_col / 2 + 1;
         map_file >> temp;
-        temp_lights[count].pos.y = temp - m_map->m_row / 2;
+        temp_lights[count].pos.y = temp - m_map->m_row / 2 + 1;
+        map_file >> temp;
+        temp_lights[count].pos.h = temp - 1;
         count++;
     }
 
@@ -177,7 +198,12 @@ void Game::set_bot(std::string map_path) {
     // above does.
 
     std::ifstream map_file;
-    map_file.open("../" + map_path);
+    map_file.open(map_path);
+    
+    if (!map_file.is_open()) {
+        std::cout << "地图载入失败……请检查路径输入是否正确" << std::endl;
+        return;
+    }
 
     Position  temp_pos;
     Direction temp_dir;
@@ -187,12 +213,17 @@ void Game::set_bot(std::string map_path) {
 
     map_file.getline(buff, sizeof(buff));
     map_file.getline(buff, sizeof(buff));
+    map_file.getline(buff, sizeof(buff));
 
     for (int i = 0; i < m_map->m_row + m_map->m_light_count; i++) {
         map_file.getline(buff, sizeof(buff));
     }
 
     map_file >> temp_pos.x >> temp_pos.y >> temp_pos.h;
+    temp_pos.x -= m_map->m_col / 2;
+    temp_pos.y -= m_map->m_row / 2;
+    temp_pos.x++;
+    temp_pos.y++;
     temp_pos.h--;
     map_file >> num;
 
@@ -232,48 +263,129 @@ void Game::process() {
         run_command();
     } else if (m_cmd_lim == 0) {
         std::cout << "指令数已达到上限，游戏失败（悲" << std::endl;
-        std::cout << "可以使用LOAD命令重新开始，或者按下control+C结束游戏"
+        std::cout << "可以使用LOAD命令重新开始，或者使用EXIT命令结束游戏"
+                  << std::endl;
+    }
+    
+    if (m_map->m_light_remaining == 0) {
+        std::cout << "恭喜你打败了ETO🎉，拯救了地球文明！" << std::endl;
+        std::cout << "可以使用LOAD命令重新开始，或者使用EXIT命令结束游戏"
                   << std::endl;
     }
 
     return;
 }
 
-void Game::run_command() {
-    // This function handles the command inputed here.
-
-    if (m_cmd == "LOAD") {
-        std::cin >> m_cmd;
-        // Here, m_cmd is temperarily uesd to store the path to the map.
-        set_map(m_cmd);
-        set_bot(m_cmd);
-        std::cout << "地图已加载完毕！" << std::endl;
-    } else if (m_cmd == "AUTOSAVE") {
-        std::cin >> m_cmd;
-        if (m_cmd == "ON") {
-            m_auto_save_id = true;
-        } else if (m_cmd == "OFF") {
-            m_auto_save_id = false;
-        } else {
-            std::cout << "输入参数有误" << std::endl;
-        }
-    } else if (m_cmd == "LIMIT") {
-        std::cin >> m_cmd_lim;
-    } else if (m_cmd == "STATUS") {
-        op_info();
-    } else if (m_cmd == "OP") {
-        // MARK: TODO
-    } else if (m_cmd == "RUN") {
-        // MARK: TODO
-    } else if (m_cmd == "HELP") {
-        show_help();
-    } else if (m_cmd == "EXIT") {
-        std::cout << "感谢您的游玩！" << std::endl;
-        m_running = false;
-    } else {
-        std::cout << "很抱歉，我不太懂这个指令是什么意思……" << std::endl;
+void Game::run(std::string cmd) {
+    
+    if (m_cmd_lim <= 0) {
+        return;
     }
+    
+    m_cmd_lim--;
+    
+    bool success_index = false;
+    
+    if (cmd == "TL") {
+        m_bot->turn(left);
+    }else if (cmd == "TR") {
+        m_bot->turn(right);
+    }else if (cmd == "LIT") {
+        m_map->light_lit(m_bot->current_position());
+    }else if (cmd == "MOV") {
+        
+        m_bot->move();
+        
+        for (int i = m_map->m_cell_count - 1; i >= 0; i--) {
+            if (m_map->cells()[i].pos.x == m_bot->current_position().x && m_map->cells()[i].pos.y == m_bot->current_position().y && m_map->cells()[i].pos.h == m_bot->current_position().h) {
+                m_bot->move();
+                success_index = true;
+                break;
+            }else {
+                continue;
+            }
+        }
+        
+        m_bot->turn(left);
+        m_bot->turn(left);
+        m_bot->move();
+        m_bot->turn(left);
+        m_bot->turn(left);
+        
+    }else if (cmd == "JMP") {
+        
+        m_bot->move();
+        
+        for (int i = m_map->m_cell_count - 1; i >= 0; i--) {
+            if (m_map->cells()[i].pos.x == m_bot->current_position().x && m_map->cells()[i].pos.y == m_bot->current_position().y && (m_map->cells()[i].pos.h == m_bot->current_position().h + 1 || m_map->cells()[i].pos.h == m_bot->current_position().h - 1)) {
+                m_bot->set_position(m_map->cells()[i].pos);
+                m_bot->move();
+                success_index = true;
+                break;
+            }else {
+                continue;
+            }
+        }
+        
+        m_bot->turn(left);
+        m_bot->turn(left);
+        m_bot->move();
+        m_bot->turn(left);
+        m_bot->turn(left);
+        
+    }else if (cmd[0] == 'P') {
+        int n = int(cmd[1]) - 48;
+        
+        for (int i = 0; i < proc_length[n]; i++) {
+            run(proc_content[n][i]);
+        }
+    }else if (cmd == "MAIN") {
+        for (int i = 0; i < proc_length[0]; i++) {
+            run(proc_content[0][i]);
+        }
+    }else {
+        std::cout << "发生了一些意外！有不明指令输入。" << std::endl;
+    }
+    
+    return;
+}
 
+void Game::open_proc() {
+    
+    std::cin >> m_cmd;
+    
+    std::ofstream proc_file;
+    proc_file.open("../" + m_cmd, std::ios::out);
+    
+    if (!proc_file.is_open()) {
+        std::cout << "文件没成功打开，寄！" << std::endl;
+        return;
+    }
+    
+    int proc_num;
+    int proc_nums[10];
+    std::string current_cmd;
+    
+    std::cin >> proc_num;
+    
+    proc_file << proc_num << "\n";
+    
+    for (int i = 0; i < proc_num; i++) {
+        std::cin >> proc_nums[i];
+        if (proc_nums[i] > proc_lim[i]) {
+            std::cout << "指令数超出上限，请再做考虑。" << std::endl;
+            return;
+        }
+        proc_file << proc_nums[i] << " ";
+        for (int j = 0; j < proc_nums[i]; j++) {
+            std::cin >> current_cmd;
+            proc_file << current_cmd << " ";
+        }
+        proc_file << "\n";
+    }
+    
+    proc_file.close();
+    
     return;
 }
 
@@ -388,6 +500,8 @@ void Ex_game::grid_init() {
     help_index = 0;
 
     start_index = true;
+    
+    select_index = true;
 
     frame_count = 0;
 
@@ -433,9 +547,11 @@ void Ex_game::input_process() {
 
         strcpy(command_lists[command_list_index % cst::CMD_list_max_len],
                input_chars);
+        m_cmd = command_lists[command_list_index % cst::CMD_list_max_len];
         command_list_index++;
         input_count              = 0;
         input_chars[input_count] = '\0';
+        
     }
 
     dynamic_curser->SetPosition(cst::dynamic_cursor_start_pos.GetX() +
@@ -452,6 +568,24 @@ void Ex_game::ex_process() {
     if (main_window->ShouldClose()) {
         m_running = false;
     }
+    
+    if (select_index) {
+        if (IsFileDropped()) {
+            map_file_path = LoadDroppedFiles();
+            if (map_file_path.count != 0) {
+                std::cout << map_file_path.count << std::endl;
+                std::cout << map_file_path.paths[map_file_path.count-1] << std::endl;
+                
+                set_map(map_file_path.paths[map_file_path.count-1]);
+                set_bot(map_file_path.paths[map_file_path.count-1]);
+                
+                start_index = false;
+                select_index = false;
+                
+                UnloadDroppedFiles(map_file_path);
+            }
+        }
+    }
 
     mouse_pos = raylib::Mouse::GetPosition();
 
@@ -465,8 +599,8 @@ void Ex_game::ex_process() {
     }
 
     if (IsKeyPressed(KEY_SPACE)) {
-        start_index = false;
-        map_selection();
+        start_index = true;
+        select_index = true;
         help_index = 0;
     }
 
@@ -492,7 +626,3 @@ void Ex_game::ex_process() {
 
     return;
 }
-
-// MARK: Map_selection_process
-
-void Ex_game::map_selection() { return; }

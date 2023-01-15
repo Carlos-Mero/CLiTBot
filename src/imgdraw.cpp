@@ -6,8 +6,89 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <cmath>
 
 // MARK: Standard features
+
+bool operator > (Position a, Position b){
+    return (a.h > b.h || a.y > b.y || a.x < b.x);
+}
+// a < b means that a is behind b.
+
+void Game::op_cell(pix ** main_map, Position cell_pos){
+    
+    const int plt_center_x = (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) / 2;
+    const int plt_center_y = cst::SCREEN_HEIGHT / 2;
+    
+    int pltx = plt_center_x + (cst::cell_length / 2) * (cell_pos.x + cell_pos.y);
+    
+    int plty = plt_center_y + (cst::cell_width / 2) * (cell_pos.x - cell_pos.y) + cst::cell_height * cell_pos.h;
+    
+    for (int i = 0; i <= cst::cell_width / 2; i++) {
+        for (int j = -(i * cst::cell_length) / cst::cell_width; j <= (i * cst::cell_length) / cst::cell_width; j++) {
+            main_map[plty - i][pltx + j] = cst::light_grey;
+            main_map[plty + i - cst::cell_width][pltx + j] = cst::light_grey;
+        }
+    }
+    
+    for (int i = -cst::cell_length / 2; i <= cst::cell_length / 2; i++) {
+        int stp = cst::cell_width - (abs(i) * cst::cell_width) / cst::cell_length;
+        for (int j = stp; j <= cst::cell_height + stp; j++) {
+            main_map[plty - j][pltx + i] = cst::dark_grey;
+        }
+    }
+    
+    return;
+}
+
+void Game::op_light(pix ** main_map, Position cell_pos) {
+    const int plt_center_x = (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) / 2;
+    const int plt_center_y = cst::SCREEN_HEIGHT / 2;
+    
+    int pltx = plt_center_x + (cst::cell_length / 2) * (cell_pos.x + cell_pos.y);
+    
+    int plty = plt_center_y + (cst::cell_width / 2) * (cell_pos.x - cell_pos.y) + cst::cell_height * cell_pos.h;
+    
+    for (int i = 0; i <= cst::cell_width / 2; i++) {
+        for (int j = -(i * cst::cell_length) / cst::cell_width; j <= (i * cst::cell_length) / cst::cell_width; j++) {
+            main_map[plty - i][pltx + j] = cst::grey_blue;
+            main_map[plty + i - cst::cell_width][pltx + j] = cst::grey_blue;
+        }
+    }
+    return;
+}
+
+void Game::op_bot(pix ** main_map, Position bot_pos, std::ifstream &bot_img){
+    
+    const int plt_center_x = (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) / 2;
+    const int plt_center_y = cst::SCREEN_HEIGHT / 2;
+    
+    int pltx = plt_center_x + (cst::cell_length / 2) * (bot_pos.x + bot_pos.y);
+    
+    int plty = plt_center_y + (cst::cell_width / 2) * (bot_pos.x - bot_pos.y) + cst::cell_height * bot_pos.h + cst::bot_height_pixels - cst::cell_width / 2 - 10;
+    
+    bot_img.seekg(54L, std::ios::cur);
+    
+    pix * temp = new pix;
+    
+    for (int j = 0; j < cst::bot_height_pixels; j++) {
+        for (int i = -cst::bot_width_pixels / 2; i <= cst::bot_width_pixels / 2; i++) {
+            bot_img.read((char *)temp, sizeof(pix));
+            if (temp->red + temp->green + temp->blue == 0) {
+                continue;
+            }else if (plty + j - cst::bot_height_pixels >= cst::SCREEN_HEIGHT) {
+                continue;
+            } else {
+                main_map[plty + j - cst::bot_height_pixels][pltx + i] = *temp;
+            }
+        }
+        bot_img.seekg(3L, std::ios::cur);
+    }
+    
+    delete temp;
+    
+    return;
+}
 
 void Game::op_map(std::string file_name) {
     // This function draws and saves the map of the game.
@@ -46,23 +127,55 @@ void Game::op_map(std::string file_name) {
     mapfile.write((char *)&cst::BIH, sizeof(cst::BIH));
     // Here we write in the header of the picture.
 
-    pix **pic = new pix *[cst::SCREEN_WIDTH - cst::WIDGET_WIDTH];
-    for (int i = 0; i < cst::SCREEN_WIDTH - cst::WIDGET_WIDTH; i++) {
-        pic[i] = new pix[cst::SCREEN_HEIGHT];
-        for (int j = 0; j < cst::SCREEN_HEIGHT; j++) {
+    pix **pic = new pix *[cst::SCREEN_HEIGHT];
+    for (int i = 0; i < cst::SCREEN_HEIGHT; i++) {
+        pic[i] = new pix[cst::SCREEN_WIDTH - cst::WIDGET_WIDTH];
+        for (int j = 0; j < cst::SCREEN_WIDTH - cst::WIDGET_WIDTH; j++) {
             pic[i][j] = cst::background_color;
         }
     }
+    
+    for (int i = 0; i < m_map->m_cell_count; i++) {
+        if (m_map->cells()[i].pos > m_bot->current_position()) {
+            continue;
+        }
+        op_cell(pic, m_map->cells()[i].pos);
+    }
+    
+    for (int i = 0; i < m_map->m_light_count; i++) {
+        if (m_map->lights()[i].turned_on) {
+            continue;
+        }
+        if (m_map->lights()[i].pos > m_bot->current_position()) {
+            continue;
+        }
+        op_light(pic, m_map->lights()[i].pos);
+    }
+    
+    op_bot(pic, m_bot->current_position(), bot_img);
+    
+    for (int i = 0; i < m_map->m_cell_count; i++) {
+        if (!(m_map->cells()[i].pos > m_bot->current_position())) {
+            continue;
+        }
+        op_cell(pic, m_map->cells()[i].pos);
+    }
+    
+    for (int i = 0; i < m_map->m_light_count; i++) {
+        if (m_map->lights()[i].turned_on) {
+            continue;
+        }
+        if (!(m_map->lights()[i].pos > m_bot->current_position())) {
+            continue;
+        }
+        op_light(pic, m_map->lights()[i].pos);
+    }
+
     // This initializes the picture in the main memory.
-
-    Position plt_st = m_bot->current_position();
-    // Set the position of the bot as the center of the whole picture.
-
+/*
     for (int i = 0; i < m_map->cells_count(); i++) {
         Position paint_pos = m_map->cells()[i].pos;
-        // Get the position of the cell.
-        paint_pos.x -= plt_st.x;
-        paint_pos.y -= plt_st.y;
+        
         // Get the relative position of the cells.
         paint_pos.x = paint_pos.x + paint_pos.y;
         paint_pos.y = paint_pos.x - paint_pos.y * 2;
@@ -154,15 +267,18 @@ void Game::op_map(std::string file_name) {
             }
         }
     }
-
-    for (int x = 0; x < cst::SCREEN_WIDTH - cst::WIDGET_WIDTH; x++) {
-        mapfile.write((char *)pic[x], cst::SCREEN_HEIGHT * sizeof(pix));
+    
+    //*/
+    
+    for (int x = 0; x < cst::SCREEN_HEIGHT; x++) {
+        mapfile.write((char *)pic[x], (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) * sizeof(pix));
+        mapfile.seekp(2L, std::ios::cur);
     }
     // This draws the picture to the file.
 
     mapfile.close();
     bot_img.close();
-    for (int i = 0; i < cst::SCREEN_WIDTH - cst::WIDGET_WIDTH; i++) {
+    for (int i = 0; i < cst::SCREEN_HEIGHT; i++) {
         delete[] pic[i];
     }
     delete[] pic;
@@ -176,7 +292,7 @@ void Game::op_map(std::string file_name) {
 void Game::auto_op_map() {
     // This function automatically saves and outputs the condition of the map.
     if (m_auto_save_id) {
-        op_map(std::to_string(m_auto_save_id));
+        op_map(std::to_string(m_auto_save_id) + ".bmp");
     }
 
     m_auto_save_id++;
@@ -270,13 +386,11 @@ void Ex_game::show_game_view() {
             tx[light_lit].Draw(
                 plt_center + cst::cell_pos_delta_x * m_map->lights()[i].pos.x +
                 cst::cell_pos_delta_y * m_map->lights()[i].pos.y +
-                cst::cell_pos_delta_h * m_map->lights()[i].pos.h +
                 cst::light_delta);
         } else {
             tx[light].Draw(plt_center +
                            cst::cell_pos_delta_x * m_map->lights()[i].pos.x +
                            cst::cell_pos_delta_y * m_map->lights()[i].pos.y +
-                           cst::cell_pos_delta_h * m_map->lights()[i].pos.h +
                            cst::light_delta);
         }
     }

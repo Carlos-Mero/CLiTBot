@@ -10,7 +10,17 @@
 
 目前我们采用CMake实现跨平台构建方案，其中使用到了外部库[raylib](https://github.com/raysan5/raylib)实现图形绘制，并应用pkg-config进行库管理。在开始构建项目前需要首先安装raylib游戏引擎（约2MB）以及pkg-config。
 
-对于macOS以及Linux用户，只需在相关依赖安装完毕后在此项目文件夹中打开命令行，依次输入：
+对于macOS用户而言，这一过程可以通过Homebrew完成，只需在终端中依次执行如下指令即可：
+
+```shell
+brew install cmake
+brew install raylib
+brew install pkg-config
+```
+
+Linux系统已内置有pkg-config，还需要安装CMake以及raylib。我们尚未针对Linux系统进行测试，具体操作方案可以参考raylib官方的[环境配置指导](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux)。
+
+在相关依赖安装完毕后，我们可以在此项目文件夹中打开终端，依次输入：
 
 ```shell
 mkdir build
@@ -32,10 +42,12 @@ make
 
 已知本游戏已知在macOS下直接运行会出现寻址异常……无法定位到游戏工作文件夹位置。暂时可以采取替代方案，在游戏文件夹中打开终端，并输入：
 
-```
+```shell
 ./CLiTBot
 ```
 
 指令运行游戏可以解决这一问题。我们还在寻找解决方案。
 
-最后，因为时间以及制作者能力有限，大作业最终效果尚且相当粗糙，还望体谅。
+本游戏仅作为大作业项目提交，并无长期运营的打算，也因为后期赶工（确信），在代码的拓展性与可维护性上有不少缺憾，不过这应该不会对游戏内容造成过多影响。
+
+最后，因为项目开发时间以及制作者能力有限，大作业最终效果尚且相当粗糙，还望体谅。

@@ -21,7 +21,7 @@ const int MAX_LIGHTS = 15;
 
 const int CMD_LIM = -1;
 
-const std::string SAVE_PATH = "./output/";
+const std::string SAVE_PATH = "../output/";
 
 // MARK: Used in Imgdraw
 
@@ -63,16 +63,16 @@ const int max_cells_l = 19;
 
 const int max_cells_w = 14;
 
-const std::string path_to_bot_up = "./resources/bot_up.bmp";
+const std::string path_to_bot_up = "../resources/bot_up.bmp";
 
-const std::string path_to_bot_down = "./resources/bot_down.bmp";
+const std::string path_to_bot_down = "../resources/bot_down.bmp";
 
-const std::string path_to_bot_right = "./resources/bot_right.bmp";
+const std::string path_to_bot_right = "../resources/bot_right.bmp";
 
-const std::string path_to_bot_left = "./resources/bot_left.bmp";
+const std::string path_to_bot_left = "../resources/bot_left.bmp";
 
 const BMPFileHeader BFH = {
-    0x4D42, (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT * 3 + 0x36, 0, 0,
+    0x4D42, (SCREEN_WIDTH - WIDGET_WIDTH) * SCREEN_HEIGHT * 3 + 0x36 + 2, 0, 0,
     0x36};
 
 const BMPInfoHeader BIH = {0x28,
@@ -131,7 +131,7 @@ const raylib::Color midgrey(237, 237, 237);
 const raylib::Color textcolor(79, 101, 133);
 
 const char start_message[] =
-    "Press Space to select a map \n\t\t\t and start the game!";
+    "Drop your map file into this window \n\t\t\t\t\t\t and start the game!";
 
 const raylib::Vector2 message_start_pos(5.0f, 36.0f);
 
