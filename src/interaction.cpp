@@ -191,10 +191,6 @@ void Game::run_command() {
     } else {
         std::cout << "很抱歉，我不太懂这个指令是什么意思……" << std::endl;
     }
-    
-    if (m_auto_save_id > 0) {
-        auto_op_map();
-    }
 
     return;
 }

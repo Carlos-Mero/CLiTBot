@@ -282,6 +282,10 @@ void Game::run(std::string cmd) {
         return;
     }
     
+    if (m_auto_save_id > 0) {
+        auto_op_map();
+    }
+    
     m_cmd_lim--;
     
     bool success_index = false;
@@ -312,6 +316,10 @@ void Game::run(std::string cmd) {
         m_bot->turn(left);
         m_bot->turn(left);
         
+        if (!success_index) {
+            std::cout << "警告⚠️，不能朝着这个方向移动。" << std::endl;
+        }
+        
     }else if (cmd == "JMP") {
         
         m_bot->move();
@@ -332,6 +340,10 @@ void Game::run(std::string cmd) {
         m_bot->move();
         m_bot->turn(left);
         m_bot->turn(left);
+        
+        if (!success_index) {
+            std::cout << "警告⚠️，不能朝着这个方向跳。" << std::endl;
+        }
         
     }else if (cmd[0] == 'P') {
         int n = int(cmd[1]) - 48;
@@ -563,6 +575,18 @@ void Ex_game::input_process() {
 
 // MARK: Ex_process workflow
 
+Position operator + (Position a, Position b) {
+    Position te;
+    te.x = a.x + b.x;
+    te.y = a.y + b.y;
+    te.h = a.h + b.h;
+    return te;
+}
+
+bool operator == (Position a, Position b) {
+    return (a.x == b.x && a.y == b.y && a.h == b.h);
+}
+
 void Ex_game::ex_process() {
 
     if (main_window->ShouldClose()) {
@@ -620,6 +644,50 @@ void Ex_game::ex_process() {
 
     if (text_selected) {
         input_process();
+    }
+    
+    if (m_cmd != "") {
+        /*if (m_cmd == "TL") {
+            m_bot->turn(left);
+        }else if (m_cmd == "TR") {
+            m_bot->turn(right);
+        }else if (m_cmd == "MOV") {
+            
+            Position tmp;
+            
+            switch (m_bot->current_direction()) {
+                case up:
+                    tmp.y = -1;
+                    break;
+                case left:
+                    tmp.x = -1;
+                    break;
+                case down:
+                    tmp.y = 1;
+                    break;
+                case right:
+                    tmp.x = 1;
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            tmp = tmp + m_bot->current_position();
+            
+            for (int i = 0; i < m_map->m_cell_count; i++) {
+                if (m_map->cells()[i].pos == tmp) {
+                    moving_index = 1;
+                }else {
+                    continue;
+                }
+            }
+            
+        } else {
+            std::cout << "无效指令，请检查……" << std::endl;
+        }*/
+        run(m_cmd);
+        m_cmd = "";
     }
 
     frame_count++;

@@ -11,9 +11,9 @@
 // MARK: Standard features
 
 bool operator > (Position a, Position b){
-    return (a.h > b.h || a.y > b.y || a.x < b.x);
+    return (a.h > b.h && a.y > b.y && a.x < b.x);
 }
-// a < b means that a is behind b.
+// a > b means that b is behind a.
 
 void Game::op_cell(pix ** main_map, Position cell_pos){
     
@@ -370,7 +370,7 @@ void Ex_game::show_game_view() {
         cst::game_view_pos + cst::game_view_size / 2 + cst::center_float;
 
     for (int i = 0; i < m_map->cells_count(); i++) {
-        if (m_map->cells()[i].pos.h > m_bot->current_position().h) {
+        if (m_map->cells()[i].pos > m_bot->current_position()) {
             continue;
         }
         tx[cell].Draw(plt_center +
@@ -498,7 +498,7 @@ void Ex_game::show_game_view() {
         cst::cell_pos_delta_h * m_bot->current_position().h + bot_pos_delta);
 
     for (int i = 0; i < m_map->cells_count(); i++) {
-        if (m_map->cells()[i].pos.h <= m_bot->current_position().h) {
+        if (!(m_map->cells()[i].pos > m_bot->current_position())) {
             continue;
         }
         tx[cell].Draw(plt_center +
