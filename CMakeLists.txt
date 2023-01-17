@@ -10,13 +10,35 @@ include_directories(./include/raylib-cpp)
 include_directories(./include/raygui)
 
 # find packages used in our project
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(raylib REQUIRED IMPORTED_TARGET raylib)
+if(APPLE)
+	find_package(PkgConfig REQUIRED)
+	pkg_check_modules(raylib REQUIRED IMPORTED_TARGET raylib)
+endif()
+
+if(Unix)
+	find_package(PkgConfig REQUIRED)
+	pkg_check_modules(raylib REQUIRED IMPORTED_TARGET raylib)
+endif()
+
+if(WIN32)
+	find_package(raylib CONFIG REQUIRED)
+endif()
 
 # generate the executable
 add_executable(${PROJECT_NAME} ${DIR_SRCS})
 
 # link instructions
-target_link_libraries(${PROJECT_NAME} PUBLIC PkgConfig::raylib)
+if(APPLE)
+	target_link_libraries(${PROJECT_NAME} PUBLIC PkgConfig::raylib)
+endif()
+
+if(UNIX)
+	target_link_libraries(${PROJECT_NAME} PUBLIC PkgConfig::raylib)
+endif()
+
+if(WIN32)
+	target_link_libraries(${PROJECT_NAME} PUBLIC raylib::raylib)
+endif()
+
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
