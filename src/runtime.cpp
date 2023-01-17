@@ -271,6 +271,7 @@ void Game::process() {
         std::cout << "恭喜你打败了ETO🎉，拯救了地球文明！" << std::endl;
         std::cout << "可以使用LOAD命令重新开始，或者使用EXIT命令结束游戏"
                   << std::endl;
+        m_map->m_light_remaining--;
     }
 
     return;

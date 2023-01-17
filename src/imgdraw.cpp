@@ -382,6 +382,9 @@ void Ex_game::show_game_view() {
 
     // We will then draw the light to the map, depending on their lit_id
     for (int i = 0; i < m_map->light_count(); i++) {
+        if (!(m_map->lights()[i].pos > m_bot->current_position())) {
+            continue;
+        }
         if (m_map->lights()[i].turned_on) {
             tx[light_lit].Draw(
                 plt_center + cst::cell_pos_delta_x * m_map->lights()[i].pos.x +
@@ -496,6 +499,23 @@ void Ex_game::show_game_view() {
         plt_center + cst::cell_pos_delta_x * m_bot->current_position().x +
         cst::cell_pos_delta_y * m_bot->current_position().y +
         cst::cell_pos_delta_h * m_bot->current_position().h + bot_pos_delta);
+    
+    for (int i = 0; i < m_map->light_count(); i++) {
+        if (m_map->lights()[i].pos > m_bot->current_position()) {
+            continue;
+        }
+        if (m_map->lights()[i].turned_on) {
+            tx[light_lit].Draw(
+                plt_center + cst::cell_pos_delta_x * m_map->lights()[i].pos.x +
+                cst::cell_pos_delta_y * m_map->lights()[i].pos.y +
+                cst::light_delta);
+        } else {
+            tx[light].Draw(plt_center +
+                           cst::cell_pos_delta_x * m_map->lights()[i].pos.x +
+                           cst::cell_pos_delta_y * m_map->lights()[i].pos.y +
+                           cst::light_delta);
+        }
+    }
 
     for (int i = 0; i < m_map->cells_count(); i++) {
         if (!(m_map->cells()[i].pos > m_bot->current_position())) {
