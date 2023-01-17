@@ -121,13 +121,13 @@ void Game::set_map(std::string map_path) {
 
     std::ifstream map_file;
     map_file.open(map_path);
-    
+
     if (!map_file.is_open()) {
         std::cout << "地图载入失败……请检查路径输入是否正确" << std::endl;
         return;
     }
-    
-    int temp = 0;
+
+    int temp  = 0;
     int count = 0;
 
     m_map = new Map();
@@ -140,9 +140,9 @@ void Game::set_map(std::string map_path) {
     map_file >> m_cmd_lim;
     // This is the second line.
     // We can lately write the map file using the input order here.
-    
+
     map_file >> proc_available;
-    
+
     for (int i = 0; i < proc_available; i++) {
         map_file >> proc_lim[i];
     }
@@ -158,20 +158,20 @@ void Game::set_map(std::string map_path) {
         for (int j = 0; j < m_map->m_col; j++) {
             map_file >> temps[j];
         }
-        for (int j = m_map->m_col-1; j >= 0; j--) {
+        for (int j = m_map->m_col - 1; j >= 0; j--) {
             temp = -1;
             while (temp < temps[j] - 1) {
                 temp++;
                 temp_cells[count].pos.h = temp;
                 temp_cells[count].pos.y = i - m_map->m_row / 2 + 1;
                 temp_cells[count].pos.x = j - m_map->m_col / 2 + 1;
-                // Here the position of the bot can have a minus value, this refers
-                // to the distance to the center of the view.
+                // Here the position of the bot can have a minus value, this
+                // refers to the distance to the center of the view.
                 count++;
             }
         }
     }
-    
+
     delete[] temps;
 
     count = 0;
@@ -199,7 +199,7 @@ void Game::set_bot(std::string map_path) {
 
     std::ifstream map_file;
     map_file.open(map_path);
-    
+
     if (!map_file.is_open()) {
         std::cout << "地图载入失败……请检查路径输入是否正确" << std::endl;
         return;
@@ -258,7 +258,7 @@ void Game::process() {
     // In this function we may need to call many other methods of the class
     // Game. All variables in this game will be updated here in this method.
 
-   if (m_cmd_lim != 0) {
+    if (m_cmd_lim != 0) {
         cin_cmd();
         run_command();
     } else if (m_cmd_lim == 0) {
@@ -266,7 +266,7 @@ void Game::process() {
         std::cout << "可以使用LOAD命令重新开始，或者使用EXIT命令结束游戏"
                   << std::endl;
     }
-    
+
     if (m_map->m_light_remaining == 0) {
         std::cout << "恭喜你打败了ETO🎉，拯救了地球文明！" << std::endl;
         std::cout << "可以使用LOAD命令重新开始，或者使用EXIT命令结束游戏"
@@ -278,111 +278,116 @@ void Game::process() {
 }
 
 void Game::run(std::string cmd) {
-    
+
     if (m_cmd_lim <= 0) {
         return;
     }
-    
+
     if (m_auto_save_id > 0) {
         auto_op_map();
     }
-    
+
     m_cmd_lim--;
-    
+
     bool success_index = false;
-    
+
     if (cmd == "TL") {
         m_bot->turn(left);
-    }else if (cmd == "TR") {
+    } else if (cmd == "TR") {
         m_bot->turn(right);
-    }else if (cmd == "LIT") {
+    } else if (cmd == "LIT") {
         m_map->light_lit(m_bot->current_position());
-    }else if (cmd == "MOV") {
-        
+    } else if (cmd == "MOV") {
+
         m_bot->move();
-        
+
         for (int i = m_map->m_cell_count - 1; i >= 0; i--) {
-            if (m_map->cells()[i].pos.x == m_bot->current_position().x && m_map->cells()[i].pos.y == m_bot->current_position().y && m_map->cells()[i].pos.h == m_bot->current_position().h) {
+            if (m_map->cells()[i].pos.x == m_bot->current_position().x &&
+                m_map->cells()[i].pos.y == m_bot->current_position().y &&
+                m_map->cells()[i].pos.h == m_bot->current_position().h) {
                 m_bot->move();
                 success_index = true;
                 break;
-            }else {
+            } else {
                 continue;
             }
         }
-        
+
         m_bot->turn(left);
         m_bot->turn(left);
         m_bot->move();
         m_bot->turn(left);
         m_bot->turn(left);
-        
+
         if (!success_index) {
             std::cout << "警告⚠️，不能朝着这个方向移动。" << std::endl;
         }
-        
-    }else if (cmd == "JMP") {
-        
+
+    } else if (cmd == "JMP") {
+
         m_bot->move();
-        
+
         for (int i = m_map->m_cell_count - 1; i >= 0; i--) {
-            if (m_map->cells()[i].pos.x == m_bot->current_position().x && m_map->cells()[i].pos.y == m_bot->current_position().y && (m_map->cells()[i].pos.h == m_bot->current_position().h + 1 || m_map->cells()[i].pos.h == m_bot->current_position().h - 1)) {
+            if (m_map->cells()[i].pos.x == m_bot->current_position().x &&
+                m_map->cells()[i].pos.y == m_bot->current_position().y &&
+                (m_map->cells()[i].pos.h == m_bot->current_position().h + 1 ||
+                 m_map->cells()[i].pos.h == m_bot->current_position().h - 1)) {
                 m_bot->set_position(m_map->cells()[i].pos);
                 m_bot->move();
                 success_index = true;
                 break;
-            }else {
+            } else {
                 continue;
             }
         }
-        
+
         m_bot->turn(left);
         m_bot->turn(left);
         m_bot->move();
         m_bot->turn(left);
         m_bot->turn(left);
-        
+
         if (!success_index) {
             std::cout << "警告⚠️，不能朝着这个方向跳。" << std::endl;
         }
-        
-    }else if (cmd[0] == 'P') {
+
+    } else if (cmd[0] == 'P') {
         int n = int(cmd[1]) - 48;
-        
+
         for (int i = 0; i < proc_length[n]; i++) {
             run(proc_content[n][i]);
         }
-    }else if (cmd == "MAIN") {
+    } else if (cmd == "MAIN") {
         for (int i = 0; i < proc_length[0]; i++) {
             run(proc_content[0][i]);
         }
-    }else {
+    } else {
         std::cout << "发生了一些意外！有不明指令输入。" << std::endl;
     }
-    
+
     return;
 }
 
 void Game::open_proc() {
-    
+
     std::cin >> m_cmd;
-    
+
     std::ofstream proc_file;
     proc_file.open("../" + m_cmd, std::ios::out);
-    
+
     if (!proc_file.is_open()) {
         std::cout << "文件没成功打开，寄！" << std::endl;
         return;
     }
-    
-    int proc_num;
-    int proc_nums[10];
+
+    int         proc_num;
+    int         proc_nums[10];
     std::string current_cmd;
-    
+
     std::cin >> proc_num;
-    
+
     proc_file << proc_num << "\n";
-    
+
     for (int i = 0; i < proc_num; i++) {
         std::cin >> proc_nums[i];
         if (proc_nums[i] > proc_lim[i]) {
@@ -396,9 +401,9 @@ void Game::open_proc() {
         }
         proc_file << "\n";
     }
-    
+
     proc_file.close();
-    
+
     return;
 }
 
@@ -513,7 +518,7 @@ void Ex_game::grid_init() {
     help_index = 0;
 
     start_index = true;
-    
+
     select_index = true;
 
     frame_count = 0;
@@ -564,7 +569,6 @@ void Ex_game::input_process() {
         command_list_index++;
         input_count              = 0;
         input_chars[input_count] = '\0';
-        
     }
 
     dynamic_curser->SetPosition(cst::dynamic_cursor_start_pos.GetX() +
@@ -576,7 +580,7 @@ void Ex_game::input_process() {
 
 // MARK: Ex_process workflow
 
-Position operator + (Position a, Position b) {
+Position operator+(Position a, Position b) {
     Position te;
     te.x = a.x + b.x;
     te.y = a.y + b.y;
@@ -584,7 +588,7 @@ Position operator + (Position a, Position b) {
     return te;
 }
 
-bool operator == (Position a, Position b) {
+bool operator==(Position a, Position b) {
     return (a.x == b.x && a.y == b.y && a.h == b.h);
 }
 
@@ -593,20 +597,21 @@ void Ex_game::ex_process() {
     if (main_window->ShouldClose()) {
         m_running = false;
     }
-    
+
     if (select_index) {
         if (IsFileDropped()) {
             map_file_path = LoadDroppedFiles();
             if (map_file_path.count != 0) {
                 std::cout << map_file_path.count << std::endl;
-                std::cout << map_file_path.paths[map_file_path.count-1] << std::endl;
-                
-                set_map(map_file_path.paths[map_file_path.count-1]);
-                set_bot(map_file_path.paths[map_file_path.count-1]);
-                
-                start_index = false;
+                std::cout << map_file_path.paths[map_file_path.count - 1]
+                          << std::endl;
+
+                set_map(map_file_path.paths[map_file_path.count - 1]);
+                set_bot(map_file_path.paths[map_file_path.count - 1]);
+
+                start_index  = false;
                 select_index = false;
-                
+
                 UnloadDroppedFiles(map_file_path);
             }
         }
@@ -624,9 +629,9 @@ void Ex_game::ex_process() {
     }
 
     if (IsKeyPressed(KEY_SPACE)) {
-        start_index = true;
+        start_index  = true;
         select_index = true;
-        help_index = 0;
+        help_index   = 0;
     }
 
     if (text_space->CheckCollision(mouse_pos) &&
@@ -646,16 +651,16 @@ void Ex_game::ex_process() {
     if (text_selected) {
         input_process();
     }
-    
+
     if (m_cmd != "") {
         /*if (m_cmd == "TL") {
             m_bot->turn(left);
         }else if (m_cmd == "TR") {
             m_bot->turn(right);
         }else if (m_cmd == "MOV") {
-            
+
             Position tmp;
-            
+
             switch (m_bot->current_direction()) {
                 case up:
                     tmp.y = -1;
@@ -669,13 +674,13 @@ void Ex_game::ex_process() {
                 case right:
                     tmp.x = 1;
                     break;
-                    
+
                 default:
                     break;
             }
-            
+
             tmp = tmp + m_bot->current_position();
-            
+
             for (int i = 0; i < m_map->m_cell_count; i++) {
                 if (m_map->cells()[i].pos == tmp) {
                     moving_index = 1;
@@ -683,7 +688,7 @@ void Ex_game::ex_process() {
                     continue;
                 }
             }
-            
+
         } else {
             std::cout << "无效指令，请检查……" << std::endl;
         }*/

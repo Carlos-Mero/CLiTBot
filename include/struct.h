@@ -79,7 +79,7 @@ class Bot {
 
     void turn(enum Direction d);
     // we can call this method to change the direction of the bot.
-    
+
     void set_position(Position p) { m_pos = p; }
 
     Position current_position() { return m_pos; }
@@ -141,7 +141,7 @@ class Map {
         m_name = s;
         return;
     }
-    
+
     std::string get_name() { return m_name; }
 
     int cells_count() { return m_cell_count; }
@@ -183,16 +183,16 @@ class Game {
 
     int m_cmd_lim;
     // This is the remaining limit of the cammands.
-    
+
     int proc_lim[10];
     // This is the limits of the proc.
-    
+
     int proc_length[10];
     // This is the length of each procs.
-    
+
     std::string proc_content[10][10];
     // This is the content of the procs.
-    
+
     int proc_available;
     // This is the number of the procs available.
 
@@ -217,11 +217,13 @@ class Game {
     // This is mainly be done in the seperated modules.
 
     void run_command();
-    // This function detects and runs the current command in the interation module.
-    
+    // This function detects and runs the current command in the interation
+    // module.
+
     void run(std::string cmd);
-    // This function is used to process a single command in the game, while using the variable m_cmd to store the cmd.
-    
+    // This function is used to process a single command in the game, while
+    // using the variable m_cmd to store the cmd.
+
     void open_proc();
     // This method is used when the player wanted to open a new proc.
 
@@ -234,14 +236,14 @@ class Game {
     void op_map(std::string file_name = "save.bmp");
     // This method is called to draw and store the condition of the map.
     // It'll mainly be done in the file imgdraw.cpp.
-    
-    void op_cell(pix ** main_map, Position cell_pos);
+
+    void op_cell(pix **main_map, Position cell_pos);
     // This method draws the cell to the map in the main memory.
-    
-    void op_light(pix ** main_map, Position cell_pos);
+
+    void op_light(pix **main_map, Position cell_pos);
     // This method draws the cell to the map in the main memory.
-    
-    void op_bot(pix ** main_map, Position bot_pos, std::ifstream &bot_img);
+
+    void op_bot(pix **main_map, Position bot_pos, std::ifstream &bot_img);
     // This method draws the bot to the map in the main memory.
 
     void auto_op_map();
@@ -338,7 +340,7 @@ class Ex_game : public Game {
     raylib::Color help_text_color;
 
     raylib::Color help_background_color;
-    
+
     FilePathList map_file_path;
 
     int help_index;

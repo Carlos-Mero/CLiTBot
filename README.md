@@ -6,11 +6,10 @@
 
 本仓库是北京某高校2022-2023学年秋季学期wyp老师的《程序设计基础》课程的小组作业项目。
 
-本次小组作业项目名为“CLiTBot”，期望能够实现一个类似于机器人点灯的小游戏。项目的具体内容还处在开发过程当中，敬请期待！
-
+本次小组作业项目名为“CLiTBot”，期望能够实现一个类似于机器人点灯的小游戏。
 ---
 
-### 编译指导
+### 编译策略
 
 目前我们采用CMake实现跨平台构建方案，其中使用到了外部库[raylib](https://github.com/raysan5/raylib)实现图形绘制，并应用pkg-config进行库管理。在开始构建项目前需要首先安装raylib游戏引擎（约2MB）以及pkg-config。
 
@@ -22,7 +21,7 @@ brew install raylib
 brew install pkg-config
 ```
 
-Linux系统已内置有pkg-config，还需要安装CMake以及raylib。我们尚未针对Linux系统进行测试，具体操作方案可以参考raylib官方的[环境配置指导](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux)。
+Linux系统已内置有pkg-config（不过也分很多情况），还需要安装CMake以及raylib。我们尚未针对Linux系统进行测试，具体操作方案可以参考raylib官方的[环境配置指导](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux)。
 
 在相关依赖安装完毕后，我们可以在此项目文件夹中打开终端，依次输入：
 
@@ -34,9 +33,19 @@ make
 
 由此即可完成项目构建。
 
-对于Windows平台，我们可以采用如下的替代方案。
+对于Windows平台，我们可以采用vcpkg替代pkg-config进行库管理。首先安装好vcpkg，然后在终端中输入：
 
-（……未完待续）
+```
+vcpkg install raylib
+```
+
+进入到项目根目录中的build文件夹下，使用
+
+```
+cmake .. -G "Visual Studio 16 2019" -A x64
+```
+
+生成VS工程文件，此后就可以进入VS进行项目构建了。
 
 此外，本项目的release页面也有macOS版本的预编译程序可供下载游玩（ARM64架构）。
 

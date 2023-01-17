@@ -2,81 +2,94 @@
 
 #include "const.h"
 #include "struct.h"
+#include <cmath>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <cmath>
 
 // MARK: Standard features
 
-bool operator > (Position a, Position b){
+bool operator>(Position a, Position b) {
     return (a.h > b.h && a.y > b.y && a.x < b.x);
 }
 // a > b means that b is behind a.
 
-void Game::op_cell(pix ** main_map, Position cell_pos){
-    
+void Game::op_cell(pix **main_map, Position cell_pos) {
+
     const int plt_center_x = (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) / 2;
     const int plt_center_y = cst::SCREEN_HEIGHT / 2;
-    
-    int pltx = plt_center_x + (cst::cell_length / 2) * (cell_pos.x + cell_pos.y);
-    
-    int plty = plt_center_y + (cst::cell_width / 2) * (cell_pos.x - cell_pos.y) + cst::cell_height * cell_pos.h;
-    
+
+    int pltx =
+        plt_center_x + (cst::cell_length / 2) * (cell_pos.x + cell_pos.y);
+
+    int plty = plt_center_y +
+               (cst::cell_width / 2) * (cell_pos.x - cell_pos.y) +
+               cst::cell_height * cell_pos.h;
+
     for (int i = 0; i <= cst::cell_width / 2; i++) {
-        for (int j = -(i * cst::cell_length) / cst::cell_width; j <= (i * cst::cell_length) / cst::cell_width; j++) {
-            main_map[plty - i][pltx + j] = cst::light_grey;
+        for (int j = -(i * cst::cell_length) / cst::cell_width;
+             j <= (i * cst::cell_length) / cst::cell_width; j++) {
+            main_map[plty - i][pltx + j]                   = cst::light_grey;
             main_map[plty + i - cst::cell_width][pltx + j] = cst::light_grey;
         }
     }
-    
+
     for (int i = -cst::cell_length / 2; i <= cst::cell_length / 2; i++) {
-        int stp = cst::cell_width - (abs(i) * cst::cell_width) / cst::cell_length;
+        int stp =
+            cst::cell_width - (abs(i) * cst::cell_width) / cst::cell_length;
         for (int j = stp; j <= cst::cell_height + stp; j++) {
             main_map[plty - j][pltx + i] = cst::dark_grey;
         }
     }
-    
+
     return;
 }
 
-void Game::op_light(pix ** main_map, Position cell_pos) {
+void Game::op_light(pix **main_map, Position cell_pos) {
     const int plt_center_x = (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) / 2;
     const int plt_center_y = cst::SCREEN_HEIGHT / 2;
-    
-    int pltx = plt_center_x + (cst::cell_length / 2) * (cell_pos.x + cell_pos.y);
-    
-    int plty = plt_center_y + (cst::cell_width / 2) * (cell_pos.x - cell_pos.y) + cst::cell_height * cell_pos.h;
-    
+
+    int pltx =
+        plt_center_x + (cst::cell_length / 2) * (cell_pos.x + cell_pos.y);
+
+    int plty = plt_center_y +
+               (cst::cell_width / 2) * (cell_pos.x - cell_pos.y) +
+               cst::cell_height * cell_pos.h;
+
     for (int i = 0; i <= cst::cell_width / 2; i++) {
-        for (int j = -(i * cst::cell_length) / cst::cell_width; j <= (i * cst::cell_length) / cst::cell_width; j++) {
-            main_map[plty - i][pltx + j] = cst::grey_blue;
+        for (int j = -(i * cst::cell_length) / cst::cell_width;
+             j <= (i * cst::cell_length) / cst::cell_width; j++) {
+            main_map[plty - i][pltx + j]                   = cst::grey_blue;
             main_map[plty + i - cst::cell_width][pltx + j] = cst::grey_blue;
         }
     }
     return;
 }
 
-void Game::op_bot(pix ** main_map, Position bot_pos, std::ifstream &bot_img){
-    
+void Game::op_bot(pix **main_map, Position bot_pos, std::ifstream &bot_img) {
+
     const int plt_center_x = (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) / 2;
     const int plt_center_y = cst::SCREEN_HEIGHT / 2;
-    
+
     int pltx = plt_center_x + (cst::cell_length / 2) * (bot_pos.x + bot_pos.y);
-    
-    int plty = plt_center_y + (cst::cell_width / 2) * (bot_pos.x - bot_pos.y) + cst::cell_height * bot_pos.h + cst::bot_height_pixels - cst::cell_width / 2 - 10;
-    
+
+    int plty = plt_center_y + (cst::cell_width / 2) * (bot_pos.x - bot_pos.y) +
+               cst::cell_height * bot_pos.h + cst::bot_height_pixels -
+               cst::cell_width / 2 - 10;
+
     bot_img.seekg(54L, std::ios::cur);
-    
-    pix * temp = new pix;
-    
+
+    pix *temp = new pix;
+
     for (int j = 0; j < cst::bot_height_pixels; j++) {
-        for (int i = -cst::bot_width_pixels / 2; i <= cst::bot_width_pixels / 2; i++) {
+        for (int i = -cst::bot_width_pixels / 2; i <= cst::bot_width_pixels / 2;
+             i++) {
             bot_img.read((char *)temp, sizeof(pix));
             if (temp->red + temp->green + temp->blue == 0) {
                 continue;
-            }else if (plty + j - cst::bot_height_pixels >= cst::SCREEN_HEIGHT) {
+            } else if (plty + j - cst::bot_height_pixels >=
+                       cst::SCREEN_HEIGHT) {
                 continue;
             } else {
                 main_map[plty + j - cst::bot_height_pixels][pltx + i] = *temp;
@@ -84,9 +97,9 @@ void Game::op_bot(pix ** main_map, Position bot_pos, std::ifstream &bot_img){
         }
         bot_img.seekg(3L, std::ios::cur);
     }
-    
+
     delete temp;
-    
+
     return;
 }
 
@@ -134,14 +147,14 @@ void Game::op_map(std::string file_name) {
             pic[i][j] = cst::background_color;
         }
     }
-    
+
     for (int i = 0; i < m_map->m_cell_count; i++) {
         if (m_map->cells()[i].pos > m_bot->current_position()) {
             continue;
         }
         op_cell(pic, m_map->cells()[i].pos);
     }
-    
+
     for (int i = 0; i < m_map->m_light_count; i++) {
         if (m_map->lights()[i].turned_on) {
             continue;
@@ -151,16 +164,16 @@ void Game::op_map(std::string file_name) {
         }
         op_light(pic, m_map->lights()[i].pos);
     }
-    
+
     op_bot(pic, m_bot->current_position(), bot_img);
-    
+
     for (int i = 0; i < m_map->m_cell_count; i++) {
         if (!(m_map->cells()[i].pos > m_bot->current_position())) {
             continue;
         }
         op_cell(pic, m_map->cells()[i].pos);
     }
-    
+
     for (int i = 0; i < m_map->m_light_count; i++) {
         if (m_map->lights()[i].turned_on) {
             continue;
@@ -172,106 +185,102 @@ void Game::op_map(std::string file_name) {
     }
 
     // This initializes the picture in the main memory.
-/*
-    for (int i = 0; i < m_map->cells_count(); i++) {
-        Position paint_pos = m_map->cells()[i].pos;
-        
-        // Get the relative position of the cells.
-        paint_pos.x = paint_pos.x + paint_pos.y;
-        paint_pos.y = paint_pos.x - paint_pos.y * 2;
-        // Transfers the position of the cell to a 2.5D view.
+    /*
+        for (int i = 0; i < m_map->cells_count(); i++) {
+            Position paint_pos = m_map->cells()[i].pos;
 
-        if (paint_pos.x >= -cst::max_cells_l / 2 &&
-            paint_pos.x <= cst::max_cells_l / 2 &&
-            paint_pos.y >= -cst::max_cells_w / 2 &&
-            paint_pos.y <= cst::max_cells_w / 2) {
-            int paint_center_l = paint_pos.x * cst::cell_length / 2 +
-                                 (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) / 2;
+            // Get the relative position of the cells.
+            paint_pos.x = paint_pos.x + paint_pos.y;
+            paint_pos.y = paint_pos.x - paint_pos.y * 2;
+            // Transfers the position of the cell to a 2.5D view.
 
-            for (int x = paint_center_l - cst::cell_length / 2;
-                 x <= paint_center_l + cst::cell_length / 2; x++) {
+            if (paint_pos.x >= -cst::max_cells_l / 2 &&
+                paint_pos.x <= cst::max_cells_l / 2 &&
+                paint_pos.y >= -cst::max_cells_w / 2 &&
+                paint_pos.y <= cst::max_cells_w / 2) {
+                int paint_center_l = paint_pos.x * cst::cell_length / 2 +
+                                     (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) /
+       2;
 
-                if (x < 0 || x > cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) {
-                    continue;
-                } else {
-                    int paint_center_w = paint_pos.y * cst::cell_width / 2 +
-                                         cst::SCREEN_HEIGHT / 2 +
-                                         paint_pos.h * cst::cell_height;
-                    int paint_width_expansion =
-                        (70 - std::abs(x - paint_center_l) * 7 / 10) / 2;
+                for (int x = paint_center_l - cst::cell_length / 2;
+                     x <= paint_center_l + cst::cell_length / 2; x++) {
 
-                    for (int y = paint_center_w + paint_width_expansion + 1;
-                         y <= paint_center_w - paint_width_expansion - 1; y--) {
+                    if (x < 0 || x > cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) {
+                        continue;
+                    } else {
+                        int paint_center_w = paint_pos.y * cst::cell_width / 2 +
+                                             cst::SCREEN_HEIGHT / 2 +
+                                             paint_pos.h * cst::cell_height;
+                        int paint_width_expansion =
+                            (70 - std::abs(x - paint_center_l) * 7 / 10) / 2;
 
-                        if (y < 0 || y > cst::SCREEN_HEIGHT) {
-                            continue;
-                        } else {
-                            pic[x][y] = cst::grey_blue;
-                        }
-                    }
-
-                    for (int k = 0; k < paint_pos.h; k++) {
-
-                        for (int y = paint_center_w - paint_width_expansion -
-                                     k * cst::cell_height - 1;
-                             y >= paint_center_w - paint_width_expansion -
-                                      (k + 1) * cst::cell_height;
-                             y--) {
+                        for (int y = paint_center_w + paint_width_expansion + 1;
+                             y <= paint_center_w - paint_width_expansion - 1;
+       y--) {
 
                             if (y < 0 || y > cst::SCREEN_HEIGHT) {
                                 continue;
                             } else {
-                                if (x < paint_center_l &&
-                                    paint_width_expansion != 0) {
-                                    pic[x][y] = cst::grey_blue;
-                                } else if (x > paint_center_l &&
-                                           paint_width_expansion != 0) {
-                                    pic[x][y] = cst::dark_grey;
+                                pic[x][y] = cst::grey_blue;
+                            }
+                        }
+
+                        for (int k = 0; k < paint_pos.h; k++) {
+
+                            for (int y = paint_center_w - paint_width_expansion
+       - k * cst::cell_height - 1; y >= paint_center_w - paint_width_expansion -
+                                          (k + 1) * cst::cell_height;
+                                 y--) {
+
+                                if (y < 0 || y > cst::SCREEN_HEIGHT) {
+                                    continue;
                                 } else {
-                                    pic[x][y] = cst::dark_line;
+                                    if (x < paint_center_l &&
+                                        paint_width_expansion != 0) {
+                                        pic[x][y] = cst::grey_blue;
+                                    } else if (x > paint_center_l &&
+                                               paint_width_expansion != 0) {
+                                        pic[x][y] = cst::dark_grey;
+                                    } else {
+                                        pic[x][y] = cst::dark_line;
+                                    }
                                 }
                             }
                         }
+                        pic[x][paint_center_w + paint_width_expansion] =
+                            cst::dark_line;
+                        pic[x][paint_center_w - paint_width_expansion] =
+                            cst::dark_line;
                     }
-                    pic[x][paint_center_w + paint_width_expansion] =
-                        cst::dark_line;
-                    pic[x][paint_center_w - paint_width_expansion] =
-                        cst::dark_line;
+                }
+            } else {
+                continue;
+            }
+        }
+        // This will draw the map to the main memory.
+        // Then we will draw the bot on the center of the map.
+        pix current_pixel;
+        for (int x =
+                 (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH - cst::bot_width_pixels)
+       / 2; x <= (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH + cst::bot_width_pixels)
+       / 2 && !bot_img.eof(); x++) { for (int y = (cst::SCREEN_HEIGHT +
+       cst::bot_height_pixels) / 2; y >= (cst::SCREEN_HEIGHT -
+       cst::bot_height_pixels) / 2 && !bot_img.eof(); y--) { bot_img.read((char
+       *)&current_pixel, sizeof(pix)); if (current_pixel.green ==
+       cst::white_pix.green && current_pixel.blue == cst::white_pix.blue &&
+                    current_pixel.red == cst::white_pix.red) {
+                    continue;
+                } else {
+                    pic[x][y] = current_pixel;
                 }
             }
-        } else {
-            continue;
         }
-    }
-    // This will draw the map to the main memory.
-    // Then we will draw the bot on the center of the map.
-    pix current_pixel;
-    for (int x =
-             (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH - cst::bot_width_pixels) /
-             2;
-         x <= (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH + cst::bot_width_pixels) /
-                  2 &&
-         !bot_img.eof();
-         x++) {
-        for (int y = (cst::SCREEN_HEIGHT + cst::bot_height_pixels) / 2;
-             y >= (cst::SCREEN_HEIGHT - cst::bot_height_pixels) / 2 &&
-             !bot_img.eof();
-             y--) {
-            bot_img.read((char *)&current_pixel, sizeof(pix));
-            if (current_pixel.green == cst::white_pix.green &&
-                current_pixel.blue == cst::white_pix.blue &&
-                current_pixel.red == cst::white_pix.red) {
-                continue;
-            } else {
-                pic[x][y] = current_pixel;
-            }
-        }
-    }
-    
-    //*/
-    
+
+        //*/
+
     for (int x = 0; x < cst::SCREEN_HEIGHT; x++) {
-        mapfile.write((char *)pic[x], (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) * sizeof(pix));
+        mapfile.write((char *)pic[x],
+                      (cst::SCREEN_WIDTH - cst::WIDGET_WIDTH) * sizeof(pix));
         mapfile.seekp(2L, std::ios::cur);
     }
     // This draws the picture to the file.
@@ -499,7 +508,7 @@ void Ex_game::show_game_view() {
         plt_center + cst::cell_pos_delta_x * m_bot->current_position().x +
         cst::cell_pos_delta_y * m_bot->current_position().y +
         cst::cell_pos_delta_h * m_bot->current_position().h + bot_pos_delta);
-    
+
     for (int i = 0; i < m_map->light_count(); i++) {
         if (m_map->lights()[i].pos > m_bot->current_position()) {
             continue;

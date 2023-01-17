@@ -30,8 +30,6 @@ start:
         main_bs();
     } else if (type == "GUI") {
         main_ex();
-    } else if (type == "debug") {
-        test();
     } else {
         std::cout << "抱歉我没听懂，请问您想要启用的游戏模式是？" << std::endl;
         goto start;
